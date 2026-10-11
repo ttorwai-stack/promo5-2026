@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>5급 승진예정자 연수 안내</title>
+<meta name="description" content="2026년 5급 승진예정자 연수(10. 21.~23.) 안내문">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;800&display=swap">
+<style>
+:root{
+  --ink:#1f2933; --paper:#f6f7f8; --card:#fff; --line:#dde2e6; --muted:#5f6b76;
+  --acc:#1f4e6b; --acc-t:#e8eff4; --on-acc:#fff;
+  --serif:"Noto Serif KR","Nanum Myeongjo",serif;
+  --sans:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --top:64px; --bot:60px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#e8edf0; --paper:#13181c; --card:#1b2227; --line:#303b43; --muted:#a2afb9;
+    --acc:#8fbad6; --acc-t:#1f2f3b; --on-acc:#10202b;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--paper);color:var(--ink)}
+body{font-family:var(--sans);font-size:18px;line-height:1.65;word-break:keep-all;overflow:hidden;-webkit-text-size-adjust:100%}
+a{color:var(--acc)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+
+/* top progress nav */
+.top{position:fixed;top:0;left:0;right:0;z-index:10;background:var(--paper);padding:calc(env(safe-area-inset-top) + 6px) 16px 0;height:calc(var(--top) + env(safe-area-inset-top))}
+.segs{display:flex;gap:3px;height:26px;align-items:center}
+.segs .gap{width:6px;flex:none}
+.seg{flex:1 1 0;min-width:0;height:26px;border:0;background:none;padding:0;position:relative}
+.seg::after{content:"";position:absolute;left:0;right:0;top:11px;height:4px;border-radius:2px;background:var(--line)}
+.seg.done::after{background:var(--acc);opacity:.45}
+.seg.on::after{background:var(--acc);opacity:1;top:9px;height:8px}
+.where{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:4px}
+.where b{font-size:1.02rem;font-weight:800}
+.where span{font-size:.82rem;color:var(--muted);white-space:nowrap}
+
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0 16px env(safe-area-inset-bottom);height:calc(var(--bot) + env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--line)}
+.nav{width:56px;height:44px;border:1px solid var(--line);background:var(--card);border-radius:10px;font-size:1.4rem;line-height:1}
+.nav:disabled{opacity:.3;cursor:default}
+.count{font-weight:700;font-variant-numeric:tabular-nums}
+
+.deck{display:flex;height:100dvh;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.deck::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100vw;width:100vw;height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;overflow-y:auto;padding:calc(var(--top) + env(safe-area-inset-top) + 18px) 22px calc(var(--bot) + env(safe-area-inset-bottom) + 28px)}
+.wrap{max-width:44rem;margin:0 auto}
+
+/* type scale: h1 > h2 > h3 > body */
+h1,h2{font-family:var(--serif);font-weight:800;line-height:1.3;letter-spacing:-.01em}
+h1{font-size:2rem;margin:8px 0 12px}
+h2{font-size:1.6rem;margin-bottom:16px}
+h3{font-size:1.25rem;font-weight:800;line-height:1.4;margin:0 0 8px}
+p{margin-bottom:12px}
+.muted{color:var(--muted)}
+.small{font-size:.88rem}
+.org{font-weight:700;color:var(--muted);font-size:.95rem}
+.dates{font-family:var(--serif);font-size:1.3rem;font-weight:600;margin-bottom:4px}
+.swipe{margin-top:20px;color:var(--muted);font-size:.95rem}
+.contact{font-size:1.15rem;font-weight:700}
+.contact a{font-size:1.3rem;font-weight:800}
+
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:60px;width:100%;padding:12px 20px;border-radius:12px;border:2px solid var(--acc);background:var(--acc);color:var(--on-acc);font-weight:800;text-decoration:none;font-size:1.15rem}
+.btn.ghost{background:transparent;color:var(--acc)}
+.row{margin:16px 0}
+
+.note{border-left:4px solid var(--acc);background:var(--acc-t);padding:14px 16px;margin-bottom:12px;border-radius:0 10px 10px 0}
+.note p:last-child{margin-bottom:0}
+.note.strong{background:var(--acc);color:var(--on-acc);border-left:0;border-radius:10px;font-weight:700}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px}
+
+.list{list-style:none}
+.list li{padding:11px 0;border-bottom:1px solid var(--line)}
+.list li:last-child{border-bottom:0}
+.meal{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line);gap:12px}
+.meal strong{font-variant-numeric:tabular-nums}
+.sec+.sec{margin-top:26px;padding-top:22px;border-top:2px solid var(--line)}
+.sec h2{font-size:1.45rem;margin-bottom:8px}
+
+.huge2{font-family:var(--serif);font-weight:800;font-size:2.8rem;line-height:1.2;color:var(--acc);margin:6px 0 18px}
+.ref{font-size:.85rem;color:var(--muted);margin:8px 0 0!important}
+.btn.sm{min-height:48px;font-size:1rem;margin-top:8px}
+.huge{font-family:var(--serif);font-weight:800;font-size:5rem;line-height:1;color:var(--acc);margin:4px 0 12px}
+.addr{display:flex;align-items:center;gap:10px;font-size:1.2rem;font-weight:800;line-height:1.5;margin-bottom:2px}
+.icon-copy{flex:none;width:40px;height:40px;border:1px solid var(--line);background:var(--card);border-radius:8px;display:grid;place-items:center;color:var(--acc)}
+.icon-copy svg{width:20px;height:20px}
+.icon-copy.ok{background:var(--acc);color:var(--on-acc)}
+
+/* bus table */
+.bt{display:grid;grid-template-columns:3.6rem 1fr 1fr 1fr;margin-bottom:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.bt>*{padding:10px 6px;border-bottom:1px solid var(--line);text-align:center;display:flex;flex-direction:column;justify-content:center}
+.bt>*:nth-last-child(-n+4){border-bottom:0}
+.bt .h{font-size:.82rem;color:var(--muted);background:var(--acc-t);padding:7px 6px}
+.bt .l{font-weight:800;font-size:.92rem;line-height:1.35;background:var(--acc-t)}
+.bt .t{font-weight:800;font-size:1.08rem;font-variant-numeric:tabular-nums;line-height:1.3}
+.bt .t small{display:block;font-size:.78rem;font-weight:600;color:var(--muted);line-height:1.3}
+.bt .t.last{color:var(--acc)}
+.bt .x{grid-column:span 3;color:var(--muted);font-weight:700;font-size:.95rem}
+
+.imgbox{margin:6px 0 14px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+.imgbox img{display:block;width:100%;height:auto}
+
+.cars{display:grid;gap:10px}
+.car{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.car b{font-family:var(--serif);font-size:1.4rem}
+.car span{font-size:1.25rem;font-weight:800;font-variant-numeric:tabular-nums;color:var(--acc)}
+
+/* timelines (past = faded) */
+.tl{list-style:none;border-left:3px solid var(--line);margin-left:6px}
+.tl li{position:relative;padding:0 0 18px 20px;transition:opacity .2s}
+.tl li::before{content:"";position:absolute;left:-9px;top:8px;width:15px;height:15px;border-radius:50%;background:var(--acc);border:3px solid var(--paper)}
+.tl time{font-weight:800;font-size:1.05rem;font-variant-numeric:tabular-nums;display:block;color:var(--acc)}
+.tl b{display:block;font-size:1.15rem;line-height:1.4}
+.tl small{display:block;color:var(--muted);font-size:.88rem;line-height:1.5}
+.past{opacity:.38}
+.past::before{background:var(--muted)!important}
+.now time::after{content:"  진행 중";font-size:.8rem;font-weight:700;background:var(--acc);color:var(--on-acc);border-radius:6px;padding:1px 8px;margin-left:6px}
+.dayhead{color:var(--muted);margin:-8px 0 18px;font-size:.95rem}
+
+.grp{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;background:var(--card)}
+.grp h3{margin-bottom:2px}
+.blk{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.blk time{font-weight:800;font-variant-numeric:tabular-nums;color:var(--acc)}
+
+@media (min-width:800px){ body{font-size:20px} h1{font-size:2.6rem} h2{font-size:2rem} .huge{font-size:6.5rem} }
+@media (prefers-reduced-motion:reduce){ .tl li{transition:none} }
+@media print{
+  body{overflow:visible;height:auto;font-size:14px}
+  .top,.bottom{display:none!important}
+  .deck{display:block;height:auto;overflow:visible}
+  .slide{width:auto;height:auto;overflow:visible;padding:0 0 24px;break-after:page}
+  .past{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <nav class="segs" id="segs" aria-label="페이지 이동"></nav>
+  <div class="where"><b id="title"></b><span id="grp"></span></div>
+</header>
+
+<main class="deck" id="deck">
+
+<!-- 시작 -->
+<section class="slide" id="cover" data-group="시작" data-title="환영합니다">
+ <div class="wrap">
+  <p class="org">경기도교육청율곡연수원</p>
+  <h1>2026년 5급 승진예정자 연수 안내</h1>
+  <p class="dates">10. 21.(수) ~ 10. 23.(금)</p>
+  <p class="muted" style="margin-bottom:26px">2박 3일 · 대강당(율곡관 2층)</p>
+  <h3>5급 승진예정자 연수에 참여해 주신 여러분, 진심으로 환영합니다!</h3>
+  <p>이번 연수를 통해 잠시 숨을 돌리며 동료분들과 함께 새로운 출발을 준비하는 시간이 되시길 바랍니다. 불편하신 점이 없도록 정성껏 준비하겠습니다.</p>
+  <p class="contact" style="margin-top:22px">담당 교수요원 김진웅<br><a href="tel:0319500024">031-950-0024</a></p>
+  <p class="swipe">옆으로 넘기면서 확인해 주세요 ›</p>
+ </div>
+</section>
+
+<section class="slide" id="notice" data-group="시작" data-title="주요 공지">
+ <div class="wrap">
+  <h2>📢 주요 공지</h2>
+  <div class="note"><p><b>1. 나이스 연수신청</b>을 아직 하지 않으신 분은 <b>즉시 신청</b>해 주세요. <b>10. 12.(월)</b>에 확정 처리됩니다.</p></div>
+  <div class="note"><p><b>2.</b> 주차는 <b>반드시 자운서원 주차장</b>을 이용해 주세요. 셔틀버스 이용자는 버스 시간표를 꼭 확인해 주세요.</p><p class="ref">자세한 안내: <span data-page="car"></span> · <span data-page="bus"></span></p></div>
+  <div class="note"><p><b>3. 생활관 배정은 10. 14.(수)까지</b> 완료해 주세요.</p><a class="btn sm" href="https://ttorwai-stack.github.io/roomassign/?c=main" target="_blank" rel="noopener">생활관 신청 바로가기</a><p class="ref">자세한 안내: <span data-page="room"></span></p></div>
+  <div class="note"><p><b>4.</b> 1일차(10. 21.)에는 <b>09:30까지</b> 등록을 완료해 주세요.</p></div>
+  <div class="note"><p><b>5.</b> 강의자료는 각 강의 전까지 공유폴더에 업로드됩니다.</p><a class="btn sm" href="https://drive.google.com/drive/folders/1CEFvXyfpGQGBDx5EQFS7GqCXej9JS4UK?usp=sharing" target="_blank" rel="noopener">강의자료 바로가기</a><p class="ref">자세한 안내: <span data-page="end"></span></p></div>
+ </div>
+</section>
+
+<!-- 일정 -->
+<section class="slide" id="schedule" data-group="연수 일정표" data-title="연수 일정표">
+ <div class="wrap">
+  <h2>📅 연수 일정표</h2>
+  <p class="small muted">위아래로 스크롤해서 확인해 주세요. 지난 일정은 흐리게 표시됩니다.</p>
+  <div class="sec">
+   <h3>1일차 · 10. 21.(수)</h3>
+   <p class="dayhead">Lead Yourself, 나를 이끌다</p>
+   <ol class="tl">
+   <li data-start="2026-10-21T09:00" data-end="2026-10-21T10:00"><time>09:00 ~ 10:00</time><b>등록 및 입교식</b></li>
+   <li data-start="2026-10-21T10:00" data-end="2026-10-21T12:00"><time>10:00 ~ 12:00</time><b>경기교육 대전환과 5대 핵심정책의 이해</b><small>정책기획관 김경관</small></li>
+   <li data-start="2026-10-21T13:00" data-end="2026-10-21T15:00"><time>13:00 ~ 15:00</time><b>마음 근력 키우기</b><small>마음건강교육연계사업 · 조은이</small></li>
+   <li data-start="2026-10-21T15:00" data-end="2026-10-21T17:00"><time>15:00 ~ 17:00</time><b>사무관의 갈 길, 선배에게 묻다</b><small>선배 멘토 5명</small></li>
+   <li data-start="2026-10-21T18:00" data-end="2026-10-21T19:00"><time>18:00 ~ 19:00</time><b>자율활동</b></li>
+  </ol>
+  </div>
+  <div class="sec">
+   <h3>2일차 · 10. 22.(목)</h3>
+   <p class="dayhead">Lead the Future, 미래를 이끌다</p>
+   <ol class="tl">
+   <li data-start="2026-10-22T09:00" data-end="2026-10-22T12:00"><time>09:00 ~ 12:00</time><b>AI로 바꾸는 일하기 방식</b><small>AI활용 정책기획실습 · 위메이크협동조합<br>선택 A 김애린 · 선택 B 유지연 · 선택 C 정혜진</small></li>
+   <li data-start="2026-10-22T13:00" data-end="2026-10-22T17:00"><time>13:00 ~ 17:00</time><b>지역 현장탐방</b><small>지역을 읽고, 경기교육을 잇다<br>오두산통일전망대 · 파주 장단콩 체험<br>자세한 이동 일정은 <span data-page="detail"></span>을 확인해 주세요.</small></li>
+   <li data-start="2026-10-22T18:00" data-end="2026-10-22T19:00"><time>18:00 ~ 19:00</time><b>자율활동</b></li>
+  </ol>
+  </div>
+  <div class="sec">
+   <h3>3일차 · 10. 23.(금)</h3>
+   <p class="dayhead">Lead Together, 함께 이끌다</p>
+   <ol class="tl">
+   <li data-start="2026-10-23T09:00" data-end="2026-10-23T11:00"><time>09:00 ~ 11:00</time><b>다름을 읽고 관계를 이끄는 리더십</b><small>정재일</small></li>
+   <li data-start="2026-10-23T11:00" data-end="2026-10-23T12:00"><time>11:00 ~ 12:00</time><b>함께 이끄는 리더로</b><small>경기교육을 선도하는 5급의 역할<br>지방공무원인사과장 조완석</small></li>
+   <li data-start="2026-10-23T13:00" data-end="2026-10-23T15:00"><time>13:00 ~ 15:00</time><b>5급, 새로운 시작을 꽃피우다</b><small>피어나 김보람</small></li>
+   <li data-start="2026-10-23T15:00" data-end="2026-10-23T15:30"><time>15:00 ~ 15:30</time><b>수료식</b></li>
+  </ol>
+  </div>
+  <p class="small muted">식사 시간은 연수원 생활 안내(<span data-page="life"></span>)를 확인해 주세요. 교과목과 강의시간은 강사 여건 및 연수원 사정에 따라 변경될 수 있습니다.</p>
+ </div>
+</section>
+
+<section class="slide" id="criteria" data-group="연수 일정표" data-title="이수 기준">
+ <div class="wrap">
+  <h2>✅ 이수 기준</h2>
+  <div class="huge">90%</div>
+  <p><b>연수 이수는 90% 이상 참석해야 인정</b>됩니다. 부득이한 사정이 있어도 사정 불문하고 참석 시간이 90%에 미달하면 이수할 수 없습니다.</p>
+  <div class="note" style="margin-top:18px"><p>90% 미만 참석자 중 일부 시간 이수자는 이수 시간과 미이수 시간을 구분하여 소속 기관으로 안내합니다. 출장 등 복무 처리 근거 자료로 활용되며, 교육시간에는 반영되지 않습니다.</p></div>
+ </div>
+</section>
+
+<!-- 오시는 길 -->
+<section class="slide" id="car" data-group="오시는 길" data-title="자차 이용 시">
+ <div class="wrap">
+  <h2>🚗 자차로 오시는 길</h2>
+  <p class="muted" style="margin-bottom:4px">📍 자운서원 주소</p>
+  <p class="addr"><span id="addr">경기도 파주시 법원읍 자운서원로 204</span>
+   <button class="icon-copy" id="copy" aria-label="주소 복사"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></p>
+  <p class="muted">(파주 이이 유적)</p>
+  <p>내비게이션에는 <b>‘자운서원’</b> 또는 <b>‘파주 이이 유적’</b>으로 검색해 주세요.</p>
+  <div class="note"><p><b>자운서원 주차장</b>을 이용해 주세요.<br>본원 내 주차는 금지입니다. 본원은 강사 및 직원용 주차공간입니다.</p></div>
+ </div>
+</section>
+
+<section class="slide" id="bus" data-group="오시는 길" data-title="출퇴근 셔틀버스">
+ <div class="wrap">
+  <h2>🚌 출퇴근 셔틀버스 <span style="white-space:nowrap">(율로 버스)</span></h2>
+  <div class="bt">
+   <div class="h"></div><div class="h">출발</div><div class="h">경유</div><div class="h">도착</div>
+   <div class="l">1일차<br>출근</div><div class="t">08:30<small>운정중앙역</small></div><div class="t">09:10<small>문산역</small></div><div class="t last">09:30<small>율곡연수원</small></div>
+   <div class="l">1일차<br>퇴근</div><div class="x">운행하지 않습니다</div>
+   <div class="l">2일차<br>출근</div><div class="t">08:00<small>운정중앙역</small></div><div class="t">08:40<small>문산역</small></div><div class="t last">09:00<small>율곡연수원</small></div>
+   <div class="l">2일차<br>퇴근</div><div class="t">17:00<small>율곡연수원</small></div><div class="t">17:20<small>문산역</small></div><div class="t last">18:00<small>운정중앙역</small></div>
+   <div class="l">3일차<br>출근</div><div class="t">08:00<small>운정중앙역</small></div><div class="t">08:40<small>문산역</small></div><div class="t last">09:00<small>율곡연수원</small></div>
+   <div class="l">3일차<br>퇴근</div><div class="t">15:00<small>율곡연수원</small></div><div class="t">15:20<small>문산역</small></div><div class="t last">16:00<small>운정중앙역</small></div>
+  </div>
+  <h3>셔틀버스 이용 시 꼭 확인해 주세요</h3>
+  <ul class="list">
+   <li><b>1일차 퇴근 버스는 운행하지 않습니다.</b></li>
+   <li>버스는 운행 시각이 되면 <b>탑승 인원을 기다리지 않고 즉시 출발</b>합니다.</li>
+   <li>도로 상황 등에 따라 운행 시각이 다소 지연될 수 있습니다.</li>
+   <li>당일에는 버스 위치나 운행 상황을 안내해 드리기 어렵습니다. <b>반드시 예정 시각 전에 해당 장소에 도착하여 대기</b>해 주세요.</li>
+  </ul>
+ </div>
+</section>
+
+<!-- 연수원 생활 -->
+<section class="slide" id="room" data-group="연수원 생활" data-title="생활관 신청 및 배정">
+ <div class="wrap">
+  <h2>🛏️ 생활관 신청 및 배정</h2>
+  <p><b>10. 14.(수)까지 입력</b>을 완료해 주세요. 기한 내 미입력 시 <b>출퇴근으로 간주</b>하여 처리됩니다.</p>
+  <div class="row"><a class="btn" href="https://ttorwai-stack.github.io/roomassign/?c=main" target="_blank" rel="noopener">생활관 신청하기</a></div>
+  <p>마감 후에는 배정된 방과 룸메이트 정보를 확인할 수 있습니다.</p>
+  <div class="note"><p>사이트 오류나 이용 문의는 담당자 김진웅<br><a href="tel:0319500024" class="contact">031-950-0024</a></p></div>
+ </div>
+</section>
+
+<section class="slide" id="life" data-group="연수원 생활" data-title="이용수칙 · 식사시간">
+ <div class="wrap">
+  <div class="sec">
+   <h2>📋 생활관 이용수칙</h2>
+   <ul class="list">
+    <li>본인 해당 실 <b>카드키가 없으면 출입 불가</b>합니다. 분실에 유의해 주세요.</li>
+    <li>공용공간이므로 <b>22시 이후에는 반드시 정숙</b>해 주세요.</li>
+    <li><b>음주, 가무, 도박은 엄금</b>입니다.</li>
+    <li>지정 흡연 구역 외에는 <b>반드시 금연</b>입니다.</li>
+   </ul>
+  </div>
+  <div class="sec">
+   <h2>🍚 식사시간</h2>
+   <div class="meal"><span>아침</span><strong>07:20 ~ 07:50</strong></div>
+   <div class="meal"><span>점심</span><strong>11:50 ~ 12:20 <small class="muted">(12:30까지 가능)</small></strong></div>
+   <div class="meal"><span>저녁</span><strong>16:50 ~ 17:20</strong></div>
+   <div class="note" style="margin-top:14px"><p><b>정해진 시간 안에 배식부터 식사까지 모두 마쳐 주세요.</b></p></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide" id="checkout" data-group="연수원 생활" data-title="입퇴소 · 준비물">
+ <div class="wrap">
+  <div class="sec">
+   <h2>🔑 입퇴소 안내</h2>
+   <p><b>10월 23일(금) 08:50 퇴소</b></p>
+   <ul class="list">
+    <li>카드키 반납 후 <b>담당자 확인</b>이 필수입니다.</li>
+    <li>이불, 패드, 베개 커버는 반드시 분리하여 <b>엘리베이터 앞 수거함</b>에 반납해 주세요.</li>
+   </ul>
+  </div>
+  <div class="sec">
+   <h2>🎒 준비물</h2>
+   <ul class="list">
+    <li><b>필수</b> · 텀블러<br><span class="muted">1회용 종이컵은 제공되지 않습니다.</span></li>
+    <li><b>선택</b> · 출장용 여행용품, 양산이나 모자, 선크림, 벌레퇴치용품, 비상약품 등</li>
+   </ul>
+  </div>
+ </div>
+</section>
+
+<section class="slide" id="map" data-group="연수원 생활" data-title="연수원 배치도">
+ <div class="wrap">
+  <h2>🗺️ 연수원 배치도</h2>
+  <div class="imgbox"><a href="images/facility.webp" target="_blank" rel="noopener"><img src="images/map.webp" alt="연수원 배치도: 직원숙소, 후관, 본관, 식당·도서관, 생활관"></a></div>
+  <p class="small muted">이미지를 누르면 층별 안내가 포함된 전체 안내도를 볼 수 있습니다.</p>
+  <p><b>강의실</b> · 대강당 (율곡관 2층)</p>
+  <p><b>주차</b> · 자운서원 주차장 (본원 내 주차 금지)</p>
+ </div>
+</section>
+
+<!-- 지역 탐방 -->
+<section class="slide" id="tour" data-group="지역 탐방" data-title="호차 안내">
+ <div class="wrap">
+  <h2>🚍 지역 탐방 체험</h2>
+  <p class="muted" style="margin-top:-8px">10. 22.(목) 오후</p>
+  <p>버스 3대로 이동하며, <b>연수번호에 따라</b> 호차를 나눠 탑승합니다.</p>
+  <div class="cars">
+   <div class="car"><b>1호차</b><span>1 ~ 32번</span></div>
+   <div class="car"><b>2호차</b><span>33 ~ 64번</span></div>
+   <div class="car"><b>3호차</b><span>65 ~ 97번</span></div>
+  </div>
+  <p style="margin-top:14px">11:30 연수원 출발부터 16:10 연수원으로 출발할 때까지 위 호차로 탑승합니다.</p>
+  <p class="small muted">조별 체험 시 차량이 바뀔 수 있습니다. 자세한 이동 일정은 다음 장을 확인해 주세요.</p>
+ </div>
+</section>
+
+<section class="slide" id="detail" data-group="지역 탐방" data-title="상세 일정">
+ <div class="wrap">
+  <h2>🗓️ 탐방 상세 일정</h2>
+  <ol class="tl">
+   <li data-start="2026-10-22T11:30" data-end="2026-10-22T12:10"><time>11:30</time><b>경기도율곡교육연수원 출발</b><small>연수번호별 호차 탑승</small></li>
+   <li data-start="2026-10-22T12:10" data-end="2026-10-22T13:10"><time>12:10</time><b>로빈의 숲 도착 · 점심식사</b><small>메뉴: 모듬바베큐(삼겹살+돼지갈비+오리+쏘시지)</small></li>
+   <li data-start="2026-10-22T13:10" data-end="2026-10-22T13:40"><time>13:10</time><b>로빈포레스트 · 커피 등 음료, 교류 시간</b><small>메뉴 한정하여 사전 선택</small></li>
+   <li data-start="2026-10-22T13:40" data-end="2026-10-22T13:50"><time>13:40</time><b>장단콩웰빙마루 주차장 도착</b><small>조별 인원 파악</small></li>
+   <li data-start="2026-10-22T13:50" data-end="2026-10-22T16:10"><time>13:50</time><b>‘조’별 이동</b><small>다음 장의 조별 일정을 확인해 주세요.</small></li>
+   <li data-start="2026-10-22T16:10" data-end="2026-10-22T16:30"><time>16:10</time><b>집결 및 연수원으로 출발</b><small>호차별 탑승 후 이동 · 안전하게 귀가하세요</small></li>
+  </ol>
+ </div>
+</section>
+
+<section class="slide" id="groups" data-group="지역 탐방" data-title="조별 일정">
+ <div class="wrap">
+  <h3 style="margin-bottom:12px">조별 일정 (13:50 ~ 16:10)</h3>
+  <div class="grp"><h3>A조 · 연수번호 1~48</h3>
+   <div class="blk" data-start="2026-10-22T13:50" data-end="2026-10-22T15:00"><time>13:50 ~ 15:00</time><br><b>오두산통일전망대</b> 관람 및 자유 시간<br><span class="small muted">문화해설사 도슨트 관람 14:00~14:30<br>자유시간(옥상 전망대 등 관람) 14:30~14:50</span></div>
+   <div class="blk" data-start="2026-10-22T15:00" data-end="2026-10-22T16:10"><time>15:00 ~ 16:10</time><br><b>장단콩웰빙마루</b> 된장체험 및 자유 시간<br><span class="small muted">된장체험 15:10~15:50</span></div></div>
+  <div class="grp"><h3>B조 · 연수번호 49~97</h3>
+   <div class="blk" data-start="2026-10-22T13:50" data-end="2026-10-22T15:00"><time>13:50 ~ 15:00</time><br><b>장단콩웰빙마루</b> 된장체험 및 자유 시간<br><span class="small muted">된장체험 14:10~14:40</span></div>
+   <div class="blk" data-start="2026-10-22T15:00" data-end="2026-10-22T16:10"><time>15:00 ~ 16:10</time><br><b>오두산통일전망대</b> 관람 및 자유 시간<br><span class="small muted">문화해설사 도슨트 관람 15:10~15:40<br>자유시간(옥상 전망대 등 관람) 15:40~16:00</span></div></div>
+  <p class="small muted">※ 상기 일정은 현지사정 및 교통체증, 천재지변 등의 상황으로 변경될 수 있습니다.</p>
+ </div>
+</section>
+
+<!-- 자료 · 문의 -->
+<section class="slide" id="claude" data-group="자료·문의" data-title="Claude Pro 이용권">
+ <div class="wrap">
+  <h2>💎 Claude Pro</h2>
+  <div class="huge2">이용권<br>제공 예정</div>
+  <p><b>5급 승진예정자 연수 참여자 전원에게 1개월 Claude Pro 이용권을 제공합니다!</b></p>
+  <p>Claude(클로드)는 요즘 가장 주목받는 AI 모델 중 하나인 미국 앤트로픽(Anthropic)사의 AI로, 글쓰기·요약·자료 정리·분석 등 업무에 폭넓게 활용됩니다.</p>
+  <div class="note"><p>10월 셋째 주(10. 12.~10. 16.) 중 별도 공지와 함께 이 안내 페이지를 업데이트할 예정입니다. 이용 방법은 그때 안내드리겠습니다.</p></div>
+ </div>
+</section>
+
+<section class="slide" id="end" data-group="자료·문의" data-title="공유폴더 · 담당자">
+ <div class="wrap">
+  <h2>💾 연수생용 공유폴더</h2>
+  <p>강의자료는 아직 업로드되지 않은 것이 많습니다. 각 강의 전까지 모두 업로드할 예정입니다.</p>
+  <div class="row"><a class="btn" href="https://drive.google.com/drive/folders/1CEFvXyfpGQGBDx5EQFS7GqCXej9JS4UK?usp=sharing" target="_blank" rel="noopener">공유폴더 열기</a></div>
+  <div class="note"><p>강의 자료(PPT, PDF)는 강사님의 지적 저작물입니다. 강의 수강 목적 외 무단 전재와 재배포를 금합니다. 저작권 관련 문제가 발생할 수 있으니 주의해 주세요.</p></div>
+  <h3 style="margin-top:24px">☎️ 담당자</h3>
+  <p class="contact">경기도교육청율곡연수원<br>교수요원 김진웅<br><a href="tel:0319500024">031-950-0024</a></p>
+  <div class="row"><button class="btn ghost" data-go="cover">처음으로</button></div>
+ </div>
+</section>
+
+</main>
+
+<footer class="bottom">
+  <button class="nav" id="prev" aria-label="이전">‹</button>
+  <span class="count" id="count"></span>
+  <button class="nav" id="next" aria-label="다음">›</button>
+</footer>
+
+<script>
+(function(){
+  var deck=document.getElementById('deck');
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var N=slides.length, cur=0;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var segsEl=document.getElementById('segs'),titleEl=document.getElementById('title'),grpEl=document.getElementById('grp');
+  var count=document.getElementById('count'),prev=document.getElementById('prev'),next=document.getElementById('next');
+  function idx(id){for(var i=0;i<N;i++)if(slides[i].id===id)return i;return -1}
+
+  // progress segments
+  var segs=[],lastG='';
+  slides.forEach(function(s,i){
+    if(i&&s.dataset.group!==lastG){var g=document.createElement('span');g.className='gap';segsEl.appendChild(g)}
+    lastG=s.dataset.group;
+    var b=document.createElement('button');b.className='seg';b.setAttribute('aria-label',(i+1)+'쪽 '+s.dataset.title);
+    b.onclick=function(){go(i)};segsEl.appendChild(b);segs.push(b);
+  });
+
+  // page references
+  [].forEach.call(document.querySelectorAll('[data-page]'),function(el){
+    var i=idx(el.dataset.page);if(i>=0)el.textContent=(i+1)+'쪽';
+  });
+
+  function render(){
+    titleEl.textContent=slides[cur].dataset.title;
+    grpEl.textContent=slides[cur].dataset.group;
+    count.textContent=(cur+1)+' / '+N;
+    prev.disabled=cur===0;next.disabled=cur===N-1;
+    segs.forEach(function(b,i){b.className='seg'+(i<cur?' done':'')+(i===cur?' on':'')});
+    try{history.replaceState(null,'','#'+slides[cur].id)}catch(e){}
+  }
+  function go(i,instant){
+    i=Math.max(0,Math.min(N-1,i));
+    deck.scrollTo({left:i*deck.clientWidth,behavior:(instant||reduce)?'auto':'smooth'});
+    cur=i;render();
+  }
+  var t;
+  deck.addEventListener('scroll',function(){
+    clearTimeout(t);
+    t=setTimeout(function(){
+      var i=Math.round(deck.scrollLeft/deck.clientWidth);
+      if(i!==cur){cur=i;render();}
+    },60);
+  },{passive:true});
+  prev.onclick=function(){go(cur-1)};
+  next.onclick=function(){go(cur+1)};
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='PageDown')go(cur+1);
+    else if(e.key==='ArrowLeft'||e.key==='PageUp')go(cur-1);
+    else if(e.key==='Home')go(0);
+    else if(e.key==='End')go(N-1);
+  });
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-go]');
+    if(b){var i=idx(b.dataset.go);if(i>=0)go(i)}
+  });
+  window.addEventListener('resize',function(){go(cur,true)});
+
+  // copy address (icon only)
+  var cp=document.getElementById('copy');
+  cp.onclick=function(){
+    var txt=document.getElementById('addr').textContent;
+    function done(){cp.classList.add('ok');cp.setAttribute('aria-label','복사했습니다');setTimeout(function(){cp.classList.remove('ok');cp.setAttribute('aria-label','주소 복사')},1600)}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,function(){})}
+    else{var r=document.createRange();r.selectNodeContents(document.getElementById('addr'));var s=getSelection();s.removeAllRanges();s.addRange(r);try{document.execCommand('copy');done()}catch(_){}}
+  };
+
+  // fade past items (KST). ?now=2026-10-22T14:00 for testing
+  function mark(){
+    var q=location.search.match(/[?&]now=([^&]+)/);
+    var now=q?Date.parse(decodeURIComponent(q[1])+'+09:00'):Date.now();
+    [].forEach.call(document.querySelectorAll('[data-end]'),function(el){
+      var s=Date.parse(el.dataset.start+':00+09:00'),e=Date.parse(el.dataset.end+':00+09:00');
+      el.classList.toggle('past',now>=e);
+      el.classList.toggle('now',now>=s&&now<e);
+    });
+  }
+  mark();setInterval(mark,60000);
+
+  var start=idx(location.hash.replace('#',''));
+  go(start>=0?start:0,true);
+})();
+</script>
+</body>
+</html>
