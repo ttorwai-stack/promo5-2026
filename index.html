@@ -130,6 +130,21 @@ p{margin-bottom:12px}
 .blk time{font-weight:800;font-variant-numeric:tabular-nums;color:var(--acc)}
 
 @media (max-height:740px){ body{font-size:17px} .slide{padding-top:calc(var(--top) + env(safe-area-inset-top) + 12px)} }
+/* 내 연수 정보 */
+.melabel{display:block;font-weight:700;margin-bottom:8px}
+.meinput{width:100%;min-height:64px;padding:10px 16px;margin-bottom:12px;border:2px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font:inherit;font-size:1.6rem;font-weight:800;letter-spacing:.04em;text-align:center;font-variant-numeric:tabular-nums}
+.meinput:focus{border-color:var(--acc)}
+.meerr{margin-top:12px;padding:12px 14px;border-radius:10px;background:var(--acc-t);border-left:4px solid var(--acc);font-weight:700}
+.mehello{font-size:1.2rem;margin:6px 0 14px}
+.mehello b{font-family:var(--serif);font-size:2.2rem;color:var(--acc);margin-right:2px}
+.mebox{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:10px}
+.mebox span{font-weight:800;font-size:1.1rem;line-height:1.35}
+.mebox small{display:block;font-weight:500;font-size:.85rem;color:var(--muted)}
+.mebox strong{font-family:var(--serif);font-size:3rem;line-height:1;color:var(--acc);font-variant-numeric:tabular-nums;white-space:nowrap}
+.mebox strong i{font-style:normal;font-size:1.1rem;font-weight:700;margin-left:3px}
+.mebig{background:var(--acc);border-color:var(--acc)}
+.mebig span,.mebig strong{color:var(--on-acc)}
+.mebig strong{font-size:4.2rem}
 @media (min-width:800px){ body{font-size:20px} h1{font-size:2.6rem} h2{font-size:2rem} .huge{font-size:6.5rem} }
 @media (prefers-reduced-motion:reduce){ .tl li{transition:none} }
 @media print{
@@ -178,6 +193,29 @@ p{margin-bottom:12px}
   <div class="note"><p><b>4.</b> 1일차(10. 21.)에는 <b>09:30까지</b> 등록을 완료해 주세요.</p></div>
   <div class="note"><p><b>5.</b> 연수원은 <b>개인용 텀블러 지참이 원칙</b>이며 1회용 종이컵은 제공되지 않습니다. 다만 <b>이번 연수에서는 개인용 텀블러를 지급</b>합니다.</p><p class="ref">자세한 안내: <span data-page="checkout"></span></p></div>
   <div class="note"><p><b>6.</b> 강의자료는 각 강의 전까지 공유폴더에 업로드됩니다.</p><a class="btn sm" href="https://drive.google.com/drive/folders/1CEFvXyfpGQGBDx5EQFS7GqCXej9JS4UK?usp=sharing" target="_blank" rel="noopener">강의자료 바로가기</a><p class="ref">자세한 안내: <span data-page="end"></span></p></div>
+ </div>
+</section>
+
+<!-- 내 연수 정보 -->
+<section class="slide" id="me" data-group="시작" data-title="내 연수 정보">
+ <div class="wrap">
+  <h2>🙋 내 연수 정보</h2>
+  <form id="meForm" autocomplete="on" novalidate>
+   <label for="mePhone" class="melabel">휴대폰 번호를 입력해 주세요</label>
+   <input id="mePhone" class="meinput" type="tel" inputmode="numeric" autocomplete="tel" placeholder="010-0000-0000" maxlength="13" aria-describedby="meErr">
+   <button class="btn" id="meGo" type="submit">내 정보 확인하기</button>
+  </form>
+  <p class="meerr" id="meErr" role="alert" hidden></p>
+  <div class="meres" id="meRes" hidden>
+   <p class="mehello"><b id="meName"></b>님, 환영합니다</p>
+   <div class="mebox mebig"><span>내 연수번호</span><strong id="meNo"></strong></div>
+   <div class="mebox"><span>1일차 분임반<small>10. 21.(수)</small></span><strong id="meG1"></strong></div>
+   <div class="mebox"><span>2일차 AI 분임<small>10. 22.(목) 오전</small></span><strong id="meAi"></strong></div>
+   <div class="mebox"><span>호차<small>10. 22.(목) 지역 탐방</small></span><strong id="meCar"></strong></div>
+   <p class="small muted">호차에 따른 탐방 시간은 <span data-page="tour"></span>, 조별 일정은 연수번호(1~48 A조 · 49~97 B조)에 따라 <span data-page="groups"></span>·<span data-page="groupsb"></span>에서 확인해 주세요.</p>
+   <div class="row"><button class="btn ghost" id="meOther" type="button">다른 번호로 확인</button></div>
+  </div>
+  <p class="small muted" id="meNote">입력한 번호는 연수 담당자에게 등록된 번호와 대조하는 데만 쓰이며, 본인 정보만 표시됩니다. 이 기기에 번호를 기억해 두어 다음부터는 바로 확인할 수 있습니다.</p>
  </div>
 </section>
 
@@ -490,6 +528,7 @@ p{margin-bottom:12px}
   prev.onclick=function(){go(cur-1)};
   next.onclick=function(){go(cur+1)};
   document.addEventListener('keydown',function(e){
+    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
     if(e.key==='ArrowRight'||e.key==='PageDown')go(cur+1);
     else if(e.key==='ArrowLeft'||e.key==='PageUp')go(cur-1);
     else if(e.key==='Home')go(0);
@@ -510,7 +549,48 @@ p{margin-bottom:12px}
     else{var r=document.createRange();r.selectNodeContents(document.getElementById('addr'));var s=getSelection();s.removeAllRanges();s.addRange(r);try{document.execCommand('copy');done()}catch(_){}}
   };
 
-  // fade past items (KST). ?now=2026-10-22T14:00 for testing
+  // 내 연수 정보 (휴대폰 번호 → Apps Script 서버에서 본인 한 명의 정보만 받아 표시)
+var ME_API='';   // Apps Script 웹앱 주소(배포 후 입력). 비어 있으면 '준비 중'으로 표시
+var ME_KEY='promo5_me_phone';
+var meForm=document.getElementById('meForm'),mePhone=document.getElementById('mePhone'),
+meGo=document.getElementById('meGo'),meErr=document.getElementById('meErr'),
+meRes=document.getElementById('meRes'),meNote=document.getElementById('meNote');
+function lsGet(){try{return localStorage.getItem(ME_KEY)||''}catch(e){return ''}}
+function lsSet(v){try{v?localStorage.setItem(ME_KEY,v):localStorage.removeItem(ME_KEY)}catch(e){}}
+function fmtPhone(d){d=d.replace(/\D/g,'').slice(0,11);
+if(d.length>7)return d.slice(0,3)+'-'+d.slice(3,7)+'-'+d.slice(7);
+if(d.length>3)return d.slice(0,3)+'-'+d.slice(3);return d}
+function meMsg(t){meErr.textContent=t;meErr.hidden=!t}
+function meShow(r){
+document.getElementById('meName').textContent=r.name;
+[['meNo',r.no,'번'],['meG1',r.group1,'분임'],['meAi',r.ai,'분임'],['meCar',r.car,'호차']].forEach(function(x){
+var el=document.getElementById(x[0]);el.textContent=x[1];var u=document.createElement('i');u.textContent=x[2];el.appendChild(u)});
+meForm.hidden=true;meNote.hidden=true;meRes.hidden=false;meMsg('')}
+function meLookup(phone,silent){
+var d=phone.replace(/\D/g,'');
+if(!/^010\d{8}$/.test(d)){meMsg('휴대폰 번호 11자리를 정확히 입력해 주세요.');return}
+if(!ME_API){meMsg('내 정보 확인 기능을 준비 중입니다. 잠시 후 다시 시도해 주세요.');return}
+meGo.disabled=true;meGo.textContent='확인 중…';meMsg('');
+fetch(ME_API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({phone:d})})
+.then(function(r){return r.json()})
+.then(function(j){
+if(j&&j.ok){lsSet(d);meShow(j)}
+else{
+if(silent)lsSet('');
+meMsg(j&&j.reason==='locked'?'잠시 후 다시 시도해 주세요. (짧은 시간에 확인 요청이 많았습니다)':
+j&&j.reason==='notfound'?'등록된 번호가 아닙니다. 연수 담당자에게 등록된 번호인지 확인해 주세요. (031-950-0024)':
+'확인하지 못했습니다. 잠시 후 다시 시도해 주세요.')}
+})
+.catch(function(){meMsg('서버에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요.')})
+.then(function(){meGo.disabled=false;meGo.textContent='내 정보 확인하기'});
+}
+mePhone.addEventListener('input',function(){mePhone.value=fmtPhone(mePhone.value)});
+meForm.addEventListener('submit',function(e){e.preventDefault();meLookup(mePhone.value)});
+document.getElementById('meOther').onclick=function(){
+lsSet('');mePhone.value='';meRes.hidden=true;meForm.hidden=false;meNote.hidden=false;meMsg('');mePhone.focus()};
+var saved=lsGet();if(saved&&ME_API){mePhone.value=fmtPhone(saved);meLookup(saved,true)}
+
+// fade past items (KST). ?now=2026-10-22T14:00 for testing
   function mark(){
     var q=location.search.match(/[?&]now=([^&]+)/);
     var now=q?Date.parse(decodeURIComponent(q[1])+'+09:00'):Date.now();
