@@ -913,7 +913,13 @@ cb.onclick=function(){var t=j.summary.map(function(r){return adminLabel(r)+' '+r
 if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){cb.textContent='복사했습니다'},function(){})};box.appendChild(cb);
 var d1=el('details');d1.appendChild(el('summary',null,'미응답 '+j.missing.length+'명'));
 d1.appendChild(el('div','dkrows',j.missing.map(function(m){return m.no+' '+m.name}).join(' · ')||'없음'));box.appendChild(d1);
-var d2=el('details');d2.appendChild(el('summary',null,'전체 선택 목록 ('+j.rows.length+'명)'));
+var dg=el('div');dg.style.marginTop='10px';dg.appendChild(el('p',null,'음료별 선택자 (가나다순)'));dg.firstChild.style.cssText='font-weight:700;margin:0 0 4px';
+j.summary.forEach(function(g){
+var names=j.rows.filter(function(r){return r.item===g.item&&r.temp===g.temp&&r.decaf===g.decaf}).sort(function(a,b){return String(a.name).localeCompare(String(b.name),'ko')});
+var dd=el('details');dd.appendChild(el('summary',null,adminLabel(g)+' ('+names.length+'명)'));
+dd.appendChild(el('div','dkrows',names.map(function(r){return r.name+'('+r.no+')'}).join(' · ')));dg.appendChild(dd)});
+box.appendChild(dg);
+var d2=el('details');d2.appendChild(el('summary',null,'연수번호순 전체 목록 ('+j.rows.length+'명)'));
 var lst=el('div','dkrows');j.rows.forEach(function(r){lst.appendChild(el('div',null,r.no+' '+r.name+' — '+adminLabel(r)+' ('+r.time+')'))});d2.appendChild(lst);box.appendChild(d2);
 var rf=el('button','btn ghost sm','새로고침');rf.type='button';rf.onclick=function(){adminLoad()};box.appendChild(rf);
 dkAdminRes.appendChild(box);dkAdminRes.hidden=false}
