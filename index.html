@@ -152,6 +152,23 @@ p{margin-bottom:12px}
 .goals{list-style:none;counter-reset:g}
 .goals li{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:12px;font-size:1.15rem;font-weight:700;line-height:1.5}
 .goals li::before{counter-increment:g;content:counter(g);flex:none;font-family:var(--serif);font-size:2rem;line-height:1;color:var(--acc)}
+/* 음료 선택 */
+.dkitems{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.dkitem,.dktemp{min-height:56px;padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font-weight:800;font-size:1.05rem;text-align:center}
+.dkitem[aria-checked="true"],.dktemp[aria-checked="true"]{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}
+.dktemps{display:flex;gap:10px;margin-bottom:12px}
+.dktemp{flex:1}
+.dkdecaf{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-weight:700}
+.dkdecaf input{width:22px;height:22px;accent-color:var(--acc)}
+.dktemps[hidden],.dkdecaf[hidden]{display:none}
+#dkDone{margin-top:12px}
+#dkAdmin{margin-top:10px;padding-top:12px;border-top:1px dashed var(--line)}
+.dkstat{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.dkstat b{font-variant-numeric:tabular-nums}
+.dkadm h3{margin:14px 0 6px}
+.dkadm details{margin-top:10px}
+.dkadm summary{font-weight:700;cursor:pointer}
+.dkadm .dkrows{font-size:.92rem;line-height:1.6}
 /* AI 분임 장소 약도 */
 .aiwrap{display:block}
 .aimap{display:block;width:100%;height:auto;max-width:30rem;margin:4px auto 14px}
@@ -217,6 +234,14 @@ p{margin-bottom:12px}
   #aiclass .aimap{max-width:none;max-height:calc(100dvh - 300px);margin:0}
   #aiclass .aipath b{font-size:1.2rem}
 
+  /* 음료 선택 */
+  #drink .wrap{max-width:60rem}
+  #dkPick{display:grid;grid-template-columns:1.3fr 1fr;gap:0 32px;align-items:start}
+  #dkPick .mehello{grid-column:1/-1;margin-bottom:10px}
+  #dkPick .dkitems{margin-bottom:0}
+  #dkPick .dkother{grid-column:1/-1;margin:12px 0 0}
+  #dkPick .dkother .btn{min-height:48px;width:auto;padding:8px 24px}
+
   /* 이수 기준 */
   #criteria .wrap{max-width:52rem}
   .huge{font-size:8rem}
@@ -252,7 +277,9 @@ p{margin-bottom:12px}
   #claudehow h2{column-span:all}
   #claudehow .list,#claudehow .note,#claudehow .row{break-inside:avoid}
   #end .wrap{max-width:52rem}
-  #me .wrap{max-width:40rem}
+  #me .wrap{max-width:52rem}
+  #meRes{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+  #meRes .mehello,#meRes .mebig,#meRes>.small,#meRes>.row{grid-column:1/-1}
 }
 @media screen and (min-width:1600px){
   html{font-size:20px}
@@ -261,6 +288,11 @@ p{margin-bottom:12px}
   html{font-size:16px}
   #schedule .sec{padding:16px 20px}
   #schedule .tl li{padding-bottom:12px}
+  #detail .tl li{padding-bottom:12px}
+  .mebox{padding:10px 18px;margin-bottom:8px}
+  .mebox strong{font-size:2.4rem}
+  .mebig strong{font-size:3.2rem}
+  .mehello{margin:4px 0 8px}
 }
 @media (prefers-reduced-motion:reduce){ .tl li{transition:none} }
 @media print{
@@ -564,11 +596,45 @@ p{margin-bottom:12px}
   <ol class="tl">
    <li data-start="2026-10-22T11:30" data-end="2026-10-22T12:10"><time>11:30</time><b>경기도율곡교육연수원 출발</b><small>연수번호별 호차 탑승</small></li>
    <li data-start="2026-10-22T12:10" data-end="2026-10-22T13:10"><time>12:10</time><b>로빈의 숲 도착 · 점심식사</b><small>메뉴: 모듬바베큐(삼겹살+돼지갈비+오리+쏘시지)</small></li>
-   <li data-start="2026-10-22T13:10" data-end="2026-10-22T13:40"><time>13:10</time><b>로빈포레스트 · 커피 등 음료, 교류 시간</b></li>
+   <li data-start="2026-10-22T13:10" data-end="2026-10-22T13:40"><time>13:10</time><b>로빈포레스트 · 커피 등 음료, 교류 시간</b><small>마실 음료는 <span data-page="drink"></span>에서 미리 선택해 주세요.</small></li>
    <li data-start="2026-10-22T13:40" data-end="2026-10-22T13:50"><time>13:40</time><b>장단콩웰빙마루 주차장 도착</b></li>
    <li data-start="2026-10-22T13:50" data-end="2026-10-22T16:10"><time>13:50</time><b>‘조’별 이동</b><small>다음 장의 조별 일정을 확인해 주세요.</small></li>
    <li data-start="2026-10-22T16:10" data-end="2026-10-22T16:30"><time>16:10</time><b>집결 및 연수원으로 출발</b><small>호차별 탑승 후 이동</small></li>
   </ol>
+ </div>
+</section>
+
+<section class="slide" id="drink" data-group="지역 탐방" data-title="음료 선택">
+ <div class="wrap">
+  <h2>☕ 음료 미리 선택</h2>
+  <p>탐방 중 <b>카페 로빈포레스트</b>(13:10)에서 마실 음료를 미리 골라 주세요. 핫·아이스도 함께 고르며, 마감 전까지는 언제든 다시 바꿀 수 있습니다.</p>
+  <form id="dkForm" autocomplete="on" novalidate>
+   <label for="dkPhone" class="melabel">휴대폰 번호를 입력해 주세요</label>
+   <input id="dkPhone" class="meinput" type="tel" inputmode="numeric" autocomplete="tel" placeholder="010-0000-0000" maxlength="13">
+   <button class="btn" id="dkGo" type="submit">확인하고 고르기</button>
+  </form>
+  <p class="meerr" id="dkErr" role="alert" hidden></p>
+  <div id="dkPick" hidden>
+   <p class="mehello"><b id="dkName"></b>님, 음료를 골라 주세요</p>
+   <div class="dkitems" id="dkItems" role="radiogroup" aria-label="음료"></div>
+   <div class="dkside">
+    <div class="dktemps" id="dkTemps" role="radiogroup" aria-label="핫 또는 아이스"></div>
+    <label class="dkdecaf" id="dkDecafL" hidden><input type="checkbox" id="dkDecaf"> 디카페인으로 변경</label>
+    <button class="btn" id="dkSave" type="button" disabled>선택 저장하기</button>
+    <p class="note strong" id="dkDone" hidden></p>
+   </div>
+   <div class="row dkother"><button class="btn ghost" id="dkOther" type="button">다른 번호로 확인</button></div>
+  </div>
+  <p class="small muted"><a href="#drink" id="dkAdminOpen">담당자 확인</a></p>
+  <div id="dkAdmin" hidden>
+   <form id="dkAdminForm" novalidate>
+    <label for="dkPin" class="melabel">관리자 번호</label>
+    <input id="dkPin" class="meinput" type="password" inputmode="numeric" autocomplete="off" maxlength="20">
+    <button class="btn" type="submit">집계 보기</button>
+   </form>
+   <p class="meerr" id="dkAdminErr" role="alert" hidden></p>
+   <div id="dkAdminRes" hidden></div>
+  </div>
  </div>
 </section>
 
@@ -673,6 +739,7 @@ p{margin-bottom:12px}
     prev.disabled=cur===0;next.disabled=cur===N-1;
     segs.forEach(function(b,i){b.className='seg'+(i<cur?' done':'')+(i===cur?' on':'')});
     try{history.replaceState(null,'','#'+slides[cur].id)}catch(e){}
+    if(window.__onShow)window.__onShow(slides[cur].id);
   }
   // 실제 스크롤 위치를 기준으로 맞추되, 버튼/키로 이동 중일 때는 목표 쪽을 따라간다
   var target=null,settleT;
@@ -763,6 +830,102 @@ meForm.addEventListener('submit',function(e){e.preventDefault();meLookup(mePhone
 document.getElementById('meOther').onclick=function(){
 lsSet('');mePhone.value='';meRes.hidden=true;meForm.hidden=false;meNote.hidden=false;meMsg('');mePhone.focus()};
 var saved=lsGet();if(saved&&ME_API){mePhone.value=fmtPhone(saved);meLookup(saved,true)}
+// 음료 선택 (본인 확인은 '내 연수 정보'와 같은 번호·서버를 쓴다)
+var dkForm=document.getElementById('dkForm'),dkPhone=document.getElementById('dkPhone'),dkGo=document.getElementById('dkGo'),
+dkErr=document.getElementById('dkErr'),dkPick=document.getElementById('dkPick'),dkItems=document.getElementById('dkItems'),
+dkTemps=document.getElementById('dkTemps'),dkDecafL=document.getElementById('dkDecafL'),dkDecaf=document.getElementById('dkDecaf'),
+dkSave=document.getElementById('dkSave'),dkDone=document.getElementById('dkDone');
+var DK={phone:'',menu:[],item:null,temp:null,closed:false,booted:false};
+function dkMsg(t){dkErr.textContent=t;dkErr.hidden=!t}
+function post(body){
+return fetch(ME_API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).then(function(r){return r.json()})}
+function dkReason(j){
+return j&&j.reason==='locked'?'잠시 후 다시 시도해 주세요. (짧은 시간에 확인 요청이 많았습니다)':
+j&&j.reason==='notfound'?'등록된 번호가 아닙니다. 연수 담당자에게 등록된 번호인지 확인해 주세요. (031-950-0024)':
+j&&j.reason==='closed'?'선택이 마감되었습니다.':
+j&&j.reason==='invalid'?'선택한 조합은 주문할 수 없습니다. 다시 골라 주세요.':
+j&&j.reason==='format'?'휴대폰 번호 11자리를 정확히 입력해 주세요.':
+'확인하지 못했습니다. 잠시 후 다시 시도해 주세요.'}
+function dkItem(){for(var i=0;i<DK.menu.length;i++)if(DK.menu[i].id===DK.item)return DK.menu[i];return null}
+function dkLabel(c){var m=null;for(var i=0;i<DK.menu.length;i++)if(DK.menu[i].id===c.item)m=DK.menu[i];
+return (m?m.name:'')+' · '+(c.temp==='HOT'?'핫':'아이스')+(c.decaf?' · 디카페인':'')}
+function dkRender(){
+dkItems.textContent='';dkTemps.textContent='';
+DK.menu.forEach(function(m){
+var b=document.createElement('button');b.type='button';b.className='dkitem';b.setAttribute('role','radio');
+b.setAttribute('aria-checked',String(DK.item===m.id));b.textContent=m.name;b.disabled=DK.closed;
+b.onclick=function(){DK.item=m.id;if(m.temps.indexOf(DK.temp)<0)DK.temp=m.temps.length===1?m.temps[0]:null;if(!m.decaf)dkDecaf.checked=false;dkRender()};
+dkItems.appendChild(b)});
+var it=dkItem();
+if(it){it.temps.forEach(function(t){
+var b=document.createElement('button');b.type='button';b.className='dktemp';b.setAttribute('role','radio');
+b.setAttribute('aria-checked',String(DK.temp===t));b.textContent=t==='HOT'?'핫':'아이스';b.disabled=DK.closed;
+b.onclick=function(){DK.temp=t;dkRender()};dkTemps.appendChild(b)})}
+dkTemps.hidden=!it;dkDecafL.hidden=!(it&&it.decaf);dkDecaf.disabled=DK.closed;
+dkSave.disabled=DK.closed||!(it&&DK.temp)}
+function dkShow(j){
+DK.menu=j.menu||[];DK.closed=!!j.closed;DK.item=null;DK.temp=null;dkDecaf.checked=false;dkDone.hidden=true;
+document.getElementById('dkName').textContent=j.name;
+if(j.choice&&j.choice.item){DK.item=j.choice.item;DK.temp=j.choice.temp;dkDecaf.checked=!!j.choice.decaf;
+dkDone.textContent='현재 선택: '+dkLabel(j.choice)+(DK.closed?' (마감)':' — 바꾸려면 다시 골라 저장해 주세요.');dkDone.hidden=false}
+else if(DK.closed){dkDone.textContent='선택이 마감되었습니다.';dkDone.hidden=false}
+dkForm.hidden=true;dkPick.hidden=false;dkMsg('');dkRender()}
+function dkLookup(phone,silent){
+var d=phone.replace(/\D/g,'');
+if(!/^010\d{8}$/.test(d)){dkMsg('휴대폰 번호 11자리를 정확히 입력해 주세요.');return}
+if(!ME_API){dkMsg('음료 선택 기능을 준비 중입니다. 잠시 후 다시 시도해 주세요.');return}
+dkGo.disabled=true;dkGo.textContent='확인 중…';dkMsg('');
+post({action:'drink_get',phone:d}).then(function(j){
+if(j&&j.ok){DK.phone=d;lsSet(d);dkShow(j)}
+else{if(silent&&j&&j.reason==='notfound')lsSet('');dkMsg(dkReason(j))}})
+.catch(function(){dkMsg('서버에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요.')})
+.then(function(){dkGo.disabled=false;dkGo.textContent='확인하고 고르기'})}
+dkPhone.addEventListener('input',function(){dkPhone.value=fmtPhone(dkPhone.value)});
+dkForm.addEventListener('submit',function(e){e.preventDefault();dkLookup(dkPhone.value)});
+dkSave.onclick=function(){
+if(!DK.item||!DK.temp)return;
+dkSave.disabled=true;dkSave.textContent='저장 중…';dkMsg('');
+post({action:'drink_set',phone:DK.phone,item:DK.item,temp:DK.temp,decaf:!!dkDecaf.checked}).then(function(j){
+if(j&&j.ok){dkDone.textContent='저장되었습니다: '+dkLabel(j.choice)+' — 마감 전까지 다시 바꿀 수 있습니다.';dkDone.hidden=false}
+else dkMsg(dkReason(j))})
+.catch(function(){dkMsg('서버에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요.')})
+.then(function(){dkSave.textContent='선택 저장하기';dkRender()})};
+document.getElementById('dkOther').onclick=function(){
+lsSet('');DK.phone='';dkPhone.value='';dkPick.hidden=true;dkForm.hidden=false;dkMsg('');dkPhone.focus()};
+// 쪽에 처음 들어오면, 이 기기에 기억된 번호로 바로 불러오기
+window.__onShow=function(id){
+if(id!=='drink'||DK.booted)return;DK.booted=true;
+var sv=lsGet();if(sv&&ME_API){dkPhone.value=fmtPhone(sv);dkLookup(sv,true)}};
+
+// 담당자 확인(관리자 번호)
+var dkAdmin=document.getElementById('dkAdmin'),dkAdminErr=document.getElementById('dkAdminErr'),dkAdminRes=document.getElementById('dkAdminRes'),dkPin=document.getElementById('dkPin');
+function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+document.getElementById('dkAdminOpen').onclick=function(e){e.preventDefault();dkAdmin.hidden=!dkAdmin.hidden;if(!dkAdmin.hidden)dkPin.focus()};
+function adminLabel(r){return r.item+' · '+(r.temp==='HOT'?'핫':'아이스')+(r.decaf?' · 디카페인':'')}
+function adminRender(j){
+dkAdminRes.textContent='';var box=el('div','dkadm');
+box.appendChild(el('h3',null,'응답 '+j.answered+' / 전체 '+j.total+'명 (미응답 '+j.missing.length+'명)'));
+j.summary.forEach(function(r){var row=el('div','dkstat');row.appendChild(el('span',null,adminLabel(r)));row.appendChild(el('b',null,r.count+'잔'));box.appendChild(row)});
+var byItem={};j.summary.forEach(function(r){byItem[r.item]=(byItem[r.item]||0)+r.count});
+var tot=el('p','small muted','메뉴별 합계: '+Object.keys(byItem).map(function(k){return k+' '+byItem[k]}).join(' · '));tot.style.marginTop='10px';box.appendChild(tot);
+var cb=el('button','btn ghost sm','집계 복사');cb.type='button';
+cb.onclick=function(){var t=j.summary.map(function(r){return adminLabel(r)+' '+r.count+'잔'}).join('\n')+'\n(응답 '+j.answered+'/'+j.total+'명)';
+if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){cb.textContent='복사했습니다'},function(){})};box.appendChild(cb);
+var d1=el('details');d1.appendChild(el('summary',null,'미응답 '+j.missing.length+'명'));
+d1.appendChild(el('div','dkrows',j.missing.map(function(m){return m.no+' '+m.name}).join(' · ')||'없음'));box.appendChild(d1);
+var d2=el('details');d2.appendChild(el('summary',null,'전체 선택 목록 ('+j.rows.length+'명)'));
+var lst=el('div','dkrows');j.rows.forEach(function(r){lst.appendChild(el('div',null,r.no+' '+r.name+' — '+adminLabel(r)+' ('+r.time+')'))});d2.appendChild(lst);box.appendChild(d2);
+var rf=el('button','btn ghost sm','새로고침');rf.type='button';rf.onclick=function(){adminLoad()};box.appendChild(rf);
+dkAdminRes.appendChild(box);dkAdminRes.hidden=false}
+function adminLoad(){
+var pin=dkPin.value;dkAdminErr.hidden=true;
+if(!ME_API){dkAdminErr.textContent='준비 중입니다.';dkAdminErr.hidden=false;return}
+post({action:'admin',pin:pin}).then(function(j){
+if(j&&j.ok)adminRender(j);
+else{dkAdminRes.hidden=true;dkAdminErr.textContent=j&&j.reason==='badpin'?'관리자 번호가 맞지 않습니다.':j&&j.reason==='locked'?'잠시 후 다시 시도해 주세요.':j&&j.reason==='noadmin'?'관리자 번호가 아직 설정되지 않았습니다.':'확인하지 못했습니다.';dkAdminErr.hidden=false}})
+.catch(function(){dkAdminErr.textContent='서버에 연결할 수 없습니다.';dkAdminErr.hidden=false})}
+document.getElementById('dkAdminForm').addEventListener('submit',function(e){e.preventDefault();adminLoad()});
+
 
 // fade past items (KST). ?now=2026-10-22T14:00 for testing
   function mark(){
