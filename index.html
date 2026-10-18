@@ -147,6 +147,80 @@ p{margin-bottom:12px}
 .mebig span,.mebig strong{color:var(--on-acc)}
 .mebig strong{font-size:4.2rem}
 @media (min-width:800px){ body{font-size:20px} h1{font-size:2.6rem} h2{font-size:2rem} .huge{font-size:6.5rem} }
+/* PC 화면(넓은 화면): 내용 폭을 넓히고 쪽마다 가로 배치. 폰 화면은 위 규칙 그대로. */
+@media screen and (min-width:1024px){
+  html{font-size:18px}
+  body{font-size:1.1rem}
+  .slide{display:flex;flex-direction:column}
+  .wrap{width:100%;max-width:60rem;margin:auto}
+  h1{font-size:3rem}
+  h2{font-size:2.1rem;margin-bottom:22px}
+  .sec h2{font-size:1.7rem}
+  .note,.card{padding:18px 22px}
+  .list li{padding:12px 0}
+
+  /* 표지 */
+  #cover .wrap{max-width:52rem}
+  #cover h1{font-size:3.6rem;line-height:1.25}
+  #cover .dates{font-size:1.7rem}
+
+  /* 공지: 2열 */
+  #notice .wrap,#notice2 .wrap{display:grid;grid-template-columns:1fr 1fr;gap:0 20px;align-content:start;max-width:68rem}
+  #notice h2,#notice2 h2{grid-column:1/-1}
+  #notice .note,#notice2 .note{margin-bottom:20px}
+
+  /* 일정표: 3일을 3열로 */
+  #schedule .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:0 28px;max-width:84rem}
+  #schedule h2,#schedule .wrap>p{grid-column:1/-1}
+  #schedule .sec{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+  #schedule .sec+.sec{margin-top:0;padding-top:20px;border-top:1px solid var(--line)}
+  #schedule .sec h3{font-size:1.3rem}
+  #schedule .dayhead{margin:0 0 16px;color:var(--acc);font-weight:700}
+  #schedule .tl li:last-child{padding-bottom:4px}
+
+  /* 이수 기준 */
+  #criteria .wrap{max-width:52rem}
+  .huge{font-size:8rem}
+
+  /* 셔틀버스 */
+  #bus .wrap{max-width:60rem}
+  .bt .t{font-size:1.3rem}
+  .bt .l{font-size:1.05rem}
+  #busnotes .wrap{max-width:52rem}
+
+  /* 생활 */
+  #room .wrap,#life .wrap,#meal .wrap{max-width:50rem}
+  #checkout .wrap{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;align-items:start;max-width:68rem}
+  #checkout .sec+.sec{margin-top:0;padding-top:0;border-top:0}
+
+  /* 배치도: 그림 왼쪽, 설명 오른쪽 */
+  #map .wrap{display:grid;grid-template-columns:max(20rem,calc((100dvh - 250px)*.903)) 1fr;gap:0 36px;align-items:start;max-width:64rem}
+  #map h3{grid-column:1/-1;font-size:1.5rem}
+  #map .imgbox{grid-row:2/5;margin:0}
+  #map .wrap>p{grid-column:2}
+
+  /* 지역 탐방 */
+  #tour .cars{grid-template-columns:repeat(3,1fr);gap:16px}
+  #tour .car{flex-direction:column;gap:8px;padding:26px 18px;text-align:center}
+  #tour .car b{font-size:1.8rem}
+  #tour .car span{font-size:1.4rem}
+  #detail .wrap,#groups .wrap,#groupsb .wrap{max-width:52rem}
+
+  /* 자료 · 문의 */
+  #claude .wrap{max-width:52rem}
+  .huge2{font-size:3.6rem}
+  #claudehow .wrap{max-width:68rem;column-count:2;column-gap:44px}
+  #claudehow h2{column-span:all}
+  #claudehow .list,#claudehow .note,#claudehow .row{break-inside:avoid}
+  #end .wrap{max-width:52rem}
+  #me .wrap{max-width:40rem}
+}
+@media screen and (min-width:1600px){
+  html{font-size:20px}
+}
+@media screen and (min-width:1024px) and (max-height:800px){
+  html{font-size:16px}
+}
 @media (prefers-reduced-motion:reduce){ .tl li{transition:none} }
 @media print{
   body{overflow:visible;height:auto;font-size:14px}
