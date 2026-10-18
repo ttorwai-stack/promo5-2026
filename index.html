@@ -152,6 +152,25 @@ p{margin-bottom:12px}
 .goals{list-style:none;counter-reset:g}
 .goals li{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:12px;font-size:1.15rem;font-weight:700;line-height:1.5}
 .goals li::before{counter-increment:g;content:counter(g);flex:none;font-family:var(--serif);font-size:2rem;line-height:1;color:var(--acc)}
+/* AI 분임 장소 약도 */
+.aiwrap{display:block}
+.aimap{display:block;width:100%;height:auto;max-width:30rem;margin:4px auto 14px}
+.aimap .pn{fill:var(--card);stroke:var(--line);stroke-width:1.5}
+.aimap .pt{fill:var(--ink);font-weight:800;font-size:15px}
+.aimap .fl{fill:var(--muted);font-weight:700;font-size:13px}
+.aimap .rm{fill:var(--acc-t);stroke:var(--line);stroke-width:1.2}
+.aimap .rm.hi{fill:var(--acc);stroke:var(--acc)}
+.aimap .rm.dae{fill:var(--card);stroke:var(--acc);stroke-width:2;stroke-dasharray:5 3}
+.aimap .nm{fill:var(--ink);font-weight:800;font-size:14px}
+.aimap .sb{fill:var(--muted);font-weight:600;font-size:12px}
+.aimap .nm.hi,.aimap .sb.hi{fill:var(--on-acc)}
+.aimap .br{fill:var(--acc-t);stroke:var(--acc);stroke-width:2}
+.aimap .bt{fill:var(--acc);font-weight:800;font-size:13px}
+.aipath{list-style:none}
+.aipath li{padding:10px 0;border-bottom:1px solid var(--line)}
+.aipath li:last-child{border-bottom:0}
+.aipath b{display:block;font-size:1.1rem;color:var(--acc)}
+.aipath span{display:block;line-height:1.5}
 /* PC 화면(넓은 화면): 내용 폭을 넓히고 쪽마다 가로 배치. 폰 화면은 위 규칙 그대로. */
 @media screen and (min-width:1024px){
   html{font-size:18px}
@@ -188,6 +207,12 @@ p{margin-bottom:12px}
   #schedule .sec h3{font-size:1.3rem}
   #schedule .dayhead{margin:0 0 16px;color:var(--acc);font-weight:700}
   #schedule .tl li:last-child{padding-bottom:4px}
+
+  /* AI 분임 장소: 약도 왼쪽, 설명 오른쪽 */
+  #aiclass .wrap{max-width:70rem}
+  #aiclass .aiwrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 40px;align-items:center}
+  #aiclass .aimap{max-width:none;max-height:calc(100dvh - 300px);margin:0}
+  #aiclass .aipath b{font-size:1.2rem}
 
   /* 이수 기준 */
   #criteria .wrap{max-width:52rem}
@@ -338,7 +363,7 @@ p{margin-bottom:12px}
    <p class="dayhead">Lead the Future, 미래를 이끌다</p>
    <p class="reg">🕘 등록 <b>08:50</b>까지</p>
    <ol class="tl">
-   <li data-start="2026-10-22T09:00" data-end="2026-10-22T12:00"><time>09:00 ~ 12:00</time><b>AI로 바꾸는 일하기 방식</b><small>AI활용 정책기획실습 · 위메이크협동조합<br>A 김애린 · B 유지연 · C 정혜진</small></li>
+   <li data-start="2026-10-22T09:00" data-end="2026-10-22T12:00"><time>09:00 ~ 12:00</time><b>AI로 바꾸는 일하기 방식</b><small>AI활용 정책기획실습 · 위메이크협동조합<br>A 김애린 · B 유지연 · C 정혜진<br>분임별 수업 장소는 <span data-page="aiclass"></span>을 확인해 주세요.</small></li>
    <li data-start="2026-10-22T13:00" data-end="2026-10-22T17:00"><time>13:00 ~ 17:00</time><b>지역 현장탐방</b><small>지역을 읽고, 경기교육을 잇다<br>오두산통일전망대 · 파주 장단콩 체험<br>자세한 이동 일정은 <span data-page="detail"></span>을 확인해 주세요.</small></li>
   </ol>
   </div>
@@ -354,6 +379,52 @@ p{margin-bottom:12px}
   </ol>
   </div>
   <p class="small muted">식사 시간은 식사시간(<span data-page="meal"></span>)를 확인해 주세요. 교과목과 강의시간은 강사 여건 및 연수원 사정에 따라 변경될 수 있습니다.</p>
+ </div>
+</section>
+
+<section class="slide" id="aiclass" data-group="연수 일정표" data-title="AI 분임 장소">
+ <div class="wrap">
+  <h2>🧭 AI 분임 수업 장소</h2>
+  <p class="muted" style="margin-top:-8px">2일차 10. 22.(목) 09:00 ~ 12:00 · 분임별로 장소가 다릅니다.</p>
+  <div class="aiwrap">
+   <svg class="aimap" viewBox="0 0 400 388" role="img" aria-label="본관 2층에서 구름다리를 건너 성학관으로 가는 약도. 별빛방은 본관 2층, 제1컴퓨터실은 성학관 1층, 제2컴퓨터실은 성학관 2층, 배움누리 대강당과 화장실은 본관 2층에 있습니다.">
+    <rect class="pn" x="10" y="10" width="380" height="180" rx="14"/>
+    <text class="pt" x="24" y="36">성학관 (후관)</text>
+    <text class="fl" x="24" y="84">2층</text>
+    <rect class="rm hi" x="282" y="58" width="96" height="50" rx="8"/>
+    <text class="nm hi" x="330" y="80" text-anchor="middle">제2컴퓨터실</text>
+    <text class="sb hi" x="330" y="98" text-anchor="middle">3분임</text>
+    <text class="fl" x="24" y="144">1층</text>
+    <rect class="rm hi" x="44" y="114" width="82" height="54" rx="8"/>
+    <text class="nm hi" x="85" y="138" text-anchor="middle">제1컴퓨터실</text>
+    <text class="sb hi" x="85" y="156" text-anchor="middle">2분임</text>
+    <rect class="rm" x="130" y="114" width="44" height="54" rx="8"/>
+    <text class="nm" x="152" y="146" text-anchor="middle">준비실</text>
+    <rect class="rm" x="206" y="114" width="96" height="54" rx="8"/>
+    <text class="nm" x="254" y="146" text-anchor="middle">행정연수부</text>
+
+    <rect class="pn" x="10" y="250" width="380" height="128" rx="14"/>
+    <text class="pt" x="24" y="276">본관 (율곡관) 2층</text>
+    <rect class="rm hi" x="24" y="296" width="116" height="62" rx="8"/>
+    <text class="nm hi" x="82" y="322" text-anchor="middle">별빛방</text>
+    <text class="sb hi" x="82" y="342" text-anchor="middle">1분임</text>
+    <rect class="rm" x="216" y="296" width="52" height="62" rx="8"/>
+    <text class="nm" x="242" y="324" text-anchor="middle">화장실</text>
+    <text class="sb" x="242" y="344" text-anchor="middle">🚻</text>
+    <rect class="rm dae" x="278" y="296" width="100" height="62" rx="8"/>
+    <text class="nm" x="328" y="322" text-anchor="middle">배움누리</text>
+    <text class="sb" x="328" y="342" text-anchor="middle">대강당</text>
+
+    <rect class="br" x="176" y="150" width="28" height="170" rx="6"/>
+    <text class="bt" transform="translate(194 235) rotate(-90)" text-anchor="middle">구름다리</text>
+   </svg>
+   <ul class="aipath">
+    <li><b>1분임 · 별빛방</b><span>본관 2층. 화장실 옆 구름다리 입구 쪽에 있습니다.</span></li>
+    <li><b>2분임 · 제1컴퓨터실</b><span>본관 2층에서 구름다리를 건너면 성학관 1층(준비실과 행정연수부 사이)입니다. 왼쪽 끝에 있습니다.</span></li>
+    <li><b>3분임 · 제2컴퓨터실</b><span>같은 구름다리로 성학관 1층에 도착한 뒤 2층으로 올라가 오른쪽 끝에 있습니다.</span></li>
+   </ul>
+  </div>
+  <p class="small muted"><b>배움누리(대강당)</b>와 <b>화장실</b>은 본관 2층에 있습니다. 내 분임은 <span data-page="me"></span>에서 확인할 수 있습니다.</p>
  </div>
 </section>
 
