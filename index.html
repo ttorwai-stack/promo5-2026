@@ -170,7 +170,7 @@ p{margin-bottom:12px}
 .dkadm details{margin-top:10px}
 .dkadm summary{font-weight:700;cursor:pointer}
 .dkadm .dkrows{font-size:.92rem;line-height:1.6}
-/* AI 분임 장소 약도 */
+/* AI 분반 장소 약도 */
 .aiwrap{display:block}
 .aimap{display:block;width:100%;height:auto;max-width:30rem;margin:4px auto 14px}
 .aimap .pn{fill:var(--card);stroke:var(--line);stroke-width:1.5}
@@ -229,7 +229,7 @@ p{margin-bottom:12px}
   #schedule .dayhead{margin:0 0 16px;color:var(--acc);font-weight:700}
   #schedule .tl li:last-child{padding-bottom:4px}
 
-  /* AI 분임 장소: 약도 왼쪽, 설명 오른쪽 */
+  /* AI 분반 장소: 약도 왼쪽, 설명 오른쪽 */
   #aiclass .wrap{max-width:70rem}
   #aiclass .aiwrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 40px;align-items:center}
   #aiclass .aimap{max-width:none;max-height:calc(100dvh - 300px);margin:0}
@@ -372,7 +372,7 @@ p{margin-bottom:12px}
    <p class="mehello"><b id="meName"></b>님, 환영합니다</p>
    <div class="mebox mebig"><span>내 연수번호</span><strong id="meNo"></strong></div>
    <div class="mebox"><span>1일차 분임반<small>10. 21.(수)</small></span><strong id="meG1"></strong></div>
-   <div class="mebox"><span>2일차 AI 분임<small>10. 22.(목) 오전</small></span><strong id="meAi"></strong></div>
+   <div class="mebox"><span>2일차 AI 분반<small>10. 22.(목) 오전</small></span><strong id="meAi"></strong></div>
    <div class="mebox"><span>호차<small>10. 22.(목) 지역 탐방</small></span><strong id="meCar"></strong></div>
    <p class="small muted">호차에 따른 탐방 시간은 <span data-page="tour"></span>, 조별 일정은 연수번호(1~48 A조 · 49~97 B조)에 따라 <span data-page="groups"></span>·<span data-page="groupsb"></span>에서 확인해 주세요.</p>
    <div class="row"><button class="btn ghost" id="meOther" type="button">다른 번호로 확인</button></div>
@@ -401,7 +401,7 @@ p{margin-bottom:12px}
    <p class="dayhead">Lead the Future, 미래를 이끌다</p>
    <p class="reg">🕘 등록 <b>08:50</b>까지</p>
    <ol class="tl">
-   <li data-start="2026-10-22T09:00" data-end="2026-10-22T12:00"><time>09:00 ~ 12:00</time><b>AI로 바꾸는 일하기 방식</b><small>AI활용 정책기획실습 · 위메이크협동조합<br>A 김애린 · B 유지연 · C 정혜진<br>분임별 수업 장소는 <span data-page="aiclass"></span>을 확인해 주세요.</small></li>
+   <li data-start="2026-10-22T09:00" data-end="2026-10-22T12:00"><time>09:00 ~ 12:00</time><b>AI로 바꾸는 일하기 방식</b><small>AI활용 정책기획실습 · 위메이크협동조합<br>1분반 김애린 · 2분반 유지연 · 3분반 정혜진<br>분반별 수업 장소는 <span data-page="aiclass"></span>을 확인해 주세요.</small></li>
    <li data-start="2026-10-22T13:00" data-end="2026-10-22T17:00"><time>13:00 ~ 17:00</time><b>지역 현장탐방</b><small>지역을 읽고, 경기교육을 잇다<br>오두산통일전망대 · 파주 장단콩 체험<br>자세한 이동 일정은 <span data-page="detail"></span>을 확인해 주세요.</small></li>
   </ol>
   </div>
@@ -420,46 +420,44 @@ p{margin-bottom:12px}
  </div>
 </section>
 
-<section class="slide" id="aiclass" data-group="연수 일정표" data-title="AI 분임 장소">
+<section class="slide" id="aiclass" data-group="연수 일정표" data-title="AI 분반 장소">
  <div class="wrap">
-  <h2>🧭 AI 분임 수업 장소</h2>
-  <p class="muted" style="margin-top:-8px">2일차 10. 22.(목) 09:00 ~ 12:00 · 분임별로 장소가 다릅니다.</p>
+  <h2>🧭 AI 분반 수업 장소</h2>
+  <p class="muted" style="margin-top:-8px">2일차 10. 22.(목) 09:00 ~ 12:00 · 분반별로 장소가 다릅니다.</p>
   <div class="aiwrap">
-   <svg class="aimap" viewBox="0 0 400 388" role="img" aria-label="본관 2층에서 구름다리를 건너 성학관 1층으로 가는 약도. 별빛방은 본관 2층, 제1컴퓨터실은 성학관 1층, 제2컴퓨터실은 성학관 2층이며 성학관 1층 오른쪽 끝 계단으로 올라갑니다. 배움누리 대강당은 본관 2층에 있습니다.">
+   <svg class="aimap" viewBox="0 0 400 356" role="img" aria-label="본관 2층 배움누리 쪽에서 구름다리를 건너 성학관으로 가는 약도. 1분반은 성학관 1층 제1컴퓨터실, 2분반은 제1컴퓨터실 바로 위 2층 행복누리, 3분반은 성학관 2층 제2컴퓨터실입니다.">
     <rect class="pn" x="10" y="10" width="380" height="180" rx="14"/>
     <text class="pt" x="24" y="36">성학관 (후관)</text>
-    <text class="fl" x="24" y="78">2층</text>
-    <rect class="rm hi" x="294" y="40" width="84" height="48" rx="8"/>
-    <text class="nm hi" x="336" y="61" text-anchor="middle">제2컴퓨터실</text>
-    <text class="sb hi" x="336" y="79" text-anchor="middle">3분임</text>
+    <text class="fl" x="24" y="76">2층</text>
+    <rect class="rm hi" x="50" y="44" width="86" height="48" rx="8"/>
+    <text class="nm hi" x="93" y="65" text-anchor="middle">행복누리</text>
+    <text class="sb hi" x="93" y="83" text-anchor="middle">2분반</text>
+    <rect class="rm hi" x="294" y="44" width="84" height="48" rx="8"/>
+    <text class="nm hi" x="336" y="65" text-anchor="middle">제2컴퓨터실</text>
+    <text class="sb hi" x="336" y="83" text-anchor="middle">3분반</text>
     <line class="fd" x1="20" y1="104" x2="380" y2="104"/>
     <text class="fl" x="24" y="146">1층</text>
     <rect class="rm hi" x="50" y="116" width="86" height="54" rx="8"/>
     <text class="nm hi" x="93" y="140" text-anchor="middle">제1컴퓨터실</text>
-    <text class="sb hi" x="93" y="158" text-anchor="middle">2분임</text>
-    <polyline class="stp" points="338,164 338,154 350,154 350,144 362,144 362,134 374,134"/>
-    <text class="sb" x="332" y="162" text-anchor="end">계단</text>
+    <text class="sb hi" x="93" y="158" text-anchor="middle">1분반</text>
 
-    <rect class="pn" x="10" y="250" width="380" height="128" rx="14"/>
+    <rect class="pn" x="10" y="250" width="380" height="96" rx="14"/>
     <text class="pt" x="24" y="276">본관 (율곡관) 2층</text>
-    <rect class="rm hi" x="24" y="296" width="116" height="62" rx="8"/>
-    <text class="nm hi" x="82" y="322" text-anchor="middle">별빛방</text>
-    <text class="sb hi" x="82" y="342" text-anchor="middle">1분임</text>
-    <rect class="rm dae" x="278" y="296" width="100" height="62" rx="8"/>
-    <text class="nm" x="328" y="322" text-anchor="middle">배움누리</text>
-    <text class="sb" x="328" y="342" text-anchor="middle">대강당</text>
+    <rect class="rm dae" x="278" y="288" width="100" height="46" rx="8"/>
+    <text class="nm" x="328" y="308" text-anchor="middle">배움누리</text>
+    <text class="sb" x="328" y="325" text-anchor="middle">대강당</text>
 
     <line class="brd" x1="200" y1="190" x2="200" y2="250"/>
     <circle class="bd" cx="200" cy="190" r="4.5"/><circle class="bd" cx="200" cy="250" r="4.5"/>
     <text class="bt" x="214" y="226">구름다리</text>
   </svg>
    <ul class="aipath">
-    <li><b>1분임 · 별빛방</b><span>본관 2층. 구름다리 입구 쪽에 있습니다.</span></li>
-    <li><b>2분임 · 제1컴퓨터실</b><span>본관 2층에서 구름다리를 건너면 성학관 1층입니다. 왼쪽 끝에 있습니다.</span></li>
-    <li><b>3분임 · 제2컴퓨터실</b><span>같은 구름다리로 성학관 1층에 도착한 뒤, 1층 오른쪽 끝의 계단으로 2층에 올라가면 있습니다.</span></li>
+    <li><b>1분반 · 제1컴퓨터실</b><span>본관 2층에서 구름다리를 건너면 성학관 1층입니다. 왼쪽 끝에 있습니다.</span></li>
+    <li><b>2분반 · 행복누리</b><span>성학관 2층, 제1컴퓨터실 바로 위에 있습니다.</span></li>
+    <li><b>3분반 · 제2컴퓨터실</b><span>성학관 2층 오른쪽 끝에 있습니다.</span></li>
    </ul>
   </div>
-  <p class="small muted"><b>배움누리(대강당)</b>는 본관 2층에 있습니다. 내 분임은 <span data-page="me"></span>에서 확인할 수 있습니다.</p>
+  <p class="small muted"><b>배움누리(대강당)</b>는 본관 2층에 있습니다. 내 분반은 <span data-page="me"></span>에서 확인할 수 있습니다.</p>
  </div>
 </section>
 
@@ -809,7 +807,7 @@ if(d.length>3)return d.slice(0,3)+'-'+d.slice(3);return d}
 function meMsg(t){meErr.textContent=t;meErr.hidden=!t}
 function meShow(r){
 document.getElementById('meName').textContent=r.name;
-[['meNo',r.no,'번'],['meG1',r.group1,'분임'],['meAi',r.ai,'분임'],['meCar',r.car,'호차']].forEach(function(x){
+[['meNo',r.no,'번'],['meG1',r.group1,'분임'],['meAi',r.ai,'분반'],['meCar',r.car,'호차']].forEach(function(x){
 var el=document.getElementById(x[0]);el.textContent=x[1];var u=document.createElement('i');u.textContent=x[2];el.appendChild(u)});
 meForm.hidden=true;meNote.hidden=true;meRes.hidden=false;meMsg('')}
 function meLookup(phone,silent){
