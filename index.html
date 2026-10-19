@@ -230,10 +230,10 @@ p{margin-bottom:12px}
   #schedule .tl li:last-child{padding-bottom:4px}
 
   /* AI 분반 장소: 약도 왼쪽, 설명 오른쪽 */
-  #aiclass .wrap{max-width:70rem}
-  #aiclass .aiwrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 40px;align-items:center}
-  #aiclass .aimap{max-width:none;max-height:calc(100dvh - 300px);margin:0}
-  #aiclass .aipath b{font-size:1.2rem}
+  #aiclass .wrap,#banim .wrap{max-width:70rem}
+  #aiclass .aiwrap,#banim .aiwrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 40px;align-items:center}
+  #aiclass .aimap,#banim .aimap{max-width:none;max-height:calc(100dvh - 300px);margin:0}
+  #aiclass .aipath b,#banim .aipath b{font-size:1.2rem}
 
   /* 음료 선택 */
   #drink .wrap{max-width:60rem}
@@ -371,7 +371,7 @@ p{margin-bottom:12px}
   <div class="meres" id="meRes" hidden>
    <p class="mehello"><b id="meName"></b>님, 환영합니다</p>
    <div class="mebox mebig"><span>내 연수번호</span><strong id="meNo"></strong></div>
-   <div class="mebox"><span>1일차 분임반<small>10. 21.(수)</small></span><strong id="meG1"></strong></div>
+   <div class="mebox"><span>1일차 분임<small>10. 21.(수) 오후</small></span><strong id="meG1"></strong></div>
    <div class="mebox"><span>2일차 AI 분반<small>10. 22.(목) 오전</small></span><strong id="meAi"></strong></div>
    <div class="mebox"><span>호차<small>10. 22.(목) 지역 탐방</small></span><strong id="meCar"></strong></div>
    <p class="small muted">호차에 따른 탐방 시간은 <span data-page="tour"></span>, 조별 일정은 연수번호(1~48 A조 · 49~97 B조)에 따라 <span data-page="groups"></span>·<span data-page="groupsb"></span>에서 확인해 주세요.</p>
@@ -393,7 +393,7 @@ p{margin-bottom:12px}
    <li data-start="2026-10-21T09:00" data-end="2026-10-21T10:00"><time>09:00 ~ 10:00</time><b>등록 및 입교식</b></li>
    <li data-start="2026-10-21T10:00" data-end="2026-10-21T12:00"><time>10:00 ~ 12:00</time><b>경기교육 대전환과 5대 핵심정책의 이해</b><small>정책기획관 김경관</small></li>
    <li data-start="2026-10-21T13:00" data-end="2026-10-21T15:00"><time>13:00 ~ 15:00</time><b>마음 근력 키우기</b><small>마음건강교육연계사업 · 조은이</small></li>
-   <li data-start="2026-10-21T15:00" data-end="2026-10-21T17:00"><time>15:00 ~ 17:00</time><b>사무관의 갈 길, 선배에게 묻다</b><small>선배 멘토 5명</small></li>
+   <li data-start="2026-10-21T15:00" data-end="2026-10-21T17:00"><time>15:00 ~ 17:00</time><b>사무관의 갈 길, 선배에게 묻다</b><small>선배 멘토 5명 · 분임별 진행<br>분임 교실은 <span data-page="banim"></span>을 확인해 주세요.</small></li>
   </ol>
   </div>
   <div class="sec">
@@ -417,6 +417,51 @@ p{margin-bottom:12px}
   </ol>
   </div>
   <p class="small muted">식사 시간은 식사시간(<span data-page="meal"></span>)를 확인해 주세요. 교과목과 강의시간은 강사 여건 및 연수원 사정에 따라 변경될 수 있습니다.</p>
+ </div>
+</section>
+
+<section class="slide" id="banim" data-group="연수 일정표" data-title="분임 교실">
+ <div class="wrap">
+  <h2>🧭 분임 교실 안내</h2>
+  <p class="muted" style="margin-top:-8px">1일차 10. 21.(수) 15:00 ~ 17:00 · 선배에게 묻다 · 분임별 교실에서 진행합니다.</p>
+  <div class="aiwrap">
+   <svg class="aimap" viewBox="0 0 400 350" role="img" aria-label="분임 교실 약도. 1분임은 본관 2층 배움누리, 2분임은 본관 2층 하늘방, 3분임은 본관 2층 바람방, 4분임은 본관 2층 별빛방, 5분임은 성학관 2층 행복누리입니다.">
+    <rect class="pn" x="10" y="10" width="380" height="112" rx="14"/>
+    <text class="pt" x="24" y="36">성학관 (후관) 2층</text>
+    <rect class="rm hi" x="24" y="48" width="112" height="60" rx="8"/>
+    <text class="nm hi" x="80" y="72" text-anchor="middle">행복누리</text>
+    <text class="sb hi" x="80" y="92" text-anchor="middle">5분임</text>
+    <text class="sb" x="150" y="82">2일차 2분반 수업 장소와 같은 교실</text>
+
+    <rect class="pn" x="10" y="172" width="380" height="168" rx="14"/>
+    <text class="pt" x="24" y="198">본관 (율곡관) 2층</text>
+    <rect class="rm hi" x="24" y="212" width="110" height="52" rx="8"/>
+    <text class="nm hi" x="79" y="234" text-anchor="middle">별빛방</text>
+    <text class="sb hi" x="79" y="252" text-anchor="middle">4분임</text>
+    <rect class="rm hi" x="24" y="276" width="104" height="52" rx="8"/>
+    <text class="nm hi" x="76" y="298" text-anchor="middle">바람방</text>
+    <text class="sb hi" x="76" y="316" text-anchor="middle">3분임</text>
+    <rect class="rm hi" x="136" y="276" width="104" height="52" rx="8"/>
+    <text class="nm hi" x="188" y="298" text-anchor="middle">하늘방</text>
+    <text class="sb hi" x="188" y="316" text-anchor="middle">2분임</text>
+    <rect class="rm hi" x="256" y="212" width="122" height="116" rx="8"/>
+    <text class="nm hi" x="317" y="258" text-anchor="middle">배움누리</text>
+    <text class="sb hi" x="317" y="278" text-anchor="middle">대강당</text>
+    <text class="sb hi" x="317" y="298" text-anchor="middle">1분임</text>
+
+    <line class="brd" x1="320" y1="122" x2="320" y2="172"/>
+    <circle class="bd" cx="320" cy="122" r="4.5"/><circle class="bd" cx="320" cy="172" r="4.5"/>
+    <text class="bt" x="304" y="152" text-anchor="end">구름다리</text>
+  </svg>
+   <ul class="aipath">
+    <li><b>1분임 · 배움누리(대강당)</b><span>본관 2층에 있습니다.</span></li>
+    <li><b>2분임 · 하늘방</b><span>본관 2층에 있습니다.</span></li>
+    <li><b>3분임 · 바람방</b><span>본관 2층에 있습니다.</span></li>
+    <li><b>4분임 · 별빛방</b><span>본관 2층에 있습니다.</span></li>
+    <li><b>5분임 · 행복누리</b><span>성학관 2층에 있습니다. 본관 2층에서 구름다리를 건너 성학관 1층에 도착한 뒤 2층으로 올라가세요. (2일차 2분반 수업 장소와 같은 교실입니다.)</span></li>
+   </ul>
+  </div>
+  <p class="small muted">내 분임은 <span data-page="me"></span>에서 확인할 수 있습니다.</p>
  </div>
 </section>
 
