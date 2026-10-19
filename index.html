@@ -289,7 +289,7 @@ p{margin-bottom:12px}
 }
 @media screen and (min-width:1024px) and (max-height:800px){
   html{font-size:16px}
-  #schedule .sec{padding:16px 20px}
+  #schedule .sec{padding:13px 20px}
   #schedule .tl li{padding-bottom:12px}
   #detail .tl li{padding-bottom:12px}
   .mebox{padding:10px 18px;margin-bottom:8px}
@@ -374,6 +374,7 @@ p{margin-bottom:12px}
    <div class="mebox"><span>1일차 분임<small>10. 21.(수) 오후</small></span><strong id="meG1"></strong></div>
    <div class="mebox"><span>2일차 AI 분반<small>10. 22.(목) 오전</small></span><strong id="meAi"></strong></div>
    <div class="mebox"><span>호차<small>10. 22.(목) 지역 탐방</small></span><strong id="meCar"></strong></div>
+   <div class="mebox"><span>탐방 조<small>10. 22.(목) 오후</small></span><strong id="meGrp"></strong></div>
    <p class="small muted">호차에 따른 탐방 시간은 <span data-page="tour"></span>, 조별 일정은 연수번호(1~48 A조 · 49~97 B조)에 따라 <span data-page="groups"></span>·<span data-page="groupsb"></span>에서 확인해 주세요.</p>
    <div class="row"><button class="btn ghost" id="meOther" type="button">다른 번호로 확인</button></div>
   </div>
@@ -852,7 +853,7 @@ if(d.length>3)return d.slice(0,3)+'-'+d.slice(3);return d}
 function meMsg(t){meErr.textContent=t;meErr.hidden=!t}
 function meShow(r){
 document.getElementById('meName').textContent=r.name;
-[['meNo',r.no,'번'],['meG1',r.group1,'분임'],['meAi',r.ai,'분반'],['meCar',r.car,'호차']].forEach(function(x){
+[['meNo',r.no,'번'],['meG1',r.group1,'분임'],['meAi',r.ai,'분반'],['meCar',r.car,'호차'],['meGrp',(Number(r.no)>=1&&Number(r.no)<=48)?'A':(Number(r.no)>=49?'B':''),'조']].forEach(function(x){
 var el=document.getElementById(x[0]);el.textContent=x[1];var u=document.createElement('i');u.textContent=x[2];el.appendChild(u)});
 meForm.hidden=true;meNote.hidden=true;meRes.hidden=false;meMsg('')}
 function meLookup(phone,silent){
