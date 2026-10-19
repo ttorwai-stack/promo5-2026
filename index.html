@@ -24,6 +24,7 @@
   }
 }
 *{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
 html,body{height:100%;background:var(--paper);color:var(--ink)}
 body{font-family:var(--sans);font-size:18px;line-height:1.65;word-break:keep-all;overflow:hidden;-webkit-text-size-adjust:100%}
 a{color:var(--acc)}
@@ -247,7 +248,9 @@ p{margin-bottom:12px}
   .huge{font-size:8rem}
 
   /* 셔틀버스 */
-  #bus .wrap{max-width:60rem}
+  #bus .wrap{max-width:70rem;display:grid;grid-template-columns:1.7fr 1fr;gap:0 28px;align-items:start}
+  #bus h2{grid-column:1/-1}
+  #bus .note{margin-top:0}
   .bt .t{font-size:1.3rem}
   .bt .l{font-size:1.05rem}
   #busnotes .wrap{max-width:52rem}
@@ -486,13 +489,14 @@ p{margin-bottom:12px}
   <h2>🚌 출퇴근 셔틀버스 <span style="white-space:nowrap">(율로 버스)</span></h2>
   <div class="bt">
    <div class="h"></div><div class="h">출발</div><div class="h">경유</div><div class="h">도착</div>
-   <div class="l">1일차<br>출근</div><div class="t">08:30<small>운정중앙역</small></div><div class="t">09:10<small>문산역</small></div><div class="t last">09:30<small>율곡연수원</small></div>
+   <div class="l">1일차<br>출근</div><div class="t">08:30<small>운정중앙역<br>2번 출구</small></div><div class="t">09:10<small>문산역<br>1번 출구</small></div><div class="t last">09:30<small>율곡연수원<br>본원 앞 주차장</small></div>
    <div class="l">1일차<br>퇴근</div><div class="x">운행하지 않습니다</div>
-   <div class="l">2일차<br>출근</div><div class="t">08:00<small>운정중앙역</small></div><div class="t">08:40<small>문산역</small></div><div class="t last">09:00<small>율곡연수원</small></div>
-   <div class="l">2일차<br>퇴근</div><div class="t">17:00<small>율곡연수원</small></div><div class="t">17:20<small>문산역</small></div><div class="t last">18:00<small>운정중앙역</small></div>
-   <div class="l">3일차<br>출근</div><div class="t">08:00<small>운정중앙역</small></div><div class="t">08:40<small>문산역</small></div><div class="t last">09:00<small>율곡연수원</small></div>
-   <div class="l">3일차<br>퇴근</div><div class="t">15:00<small>율곡연수원</small></div><div class="t">15:20<small>문산역</small></div><div class="t last">16:00<small>운정중앙역</small></div>
+   <div class="l">2일차<br>출근</div><div class="t">08:00<small>운정중앙역<br>2번 출구</small></div><div class="t">08:40<small>문산역<br>1번 출구</small></div><div class="t last">09:00<small>율곡연수원<br>본원 앞 주차장</small></div>
+   <div class="l">2일차<br>퇴근</div><div class="t">17:00<small>율곡연수원<br>본원 앞 주차장</small></div><div class="t">17:20<small>문산역<br>1번 출구</small></div><div class="t last">18:00<small>운정중앙역<br>2번 출구</small></div>
+   <div class="l">3일차<br>출근</div><div class="t">08:00<small>운정중앙역<br>2번 출구</small></div><div class="t">08:40<small>문산역<br>1번 출구</small></div><div class="t last">09:00<small>율곡연수원<br>본원 앞 주차장</small></div>
+   <div class="l">3일차<br>퇴근</div><div class="t">15:00<small>율곡연수원<br>본원 앞 주차장</small></div><div class="t">15:20<small>문산역<br>1번 출구</small></div><div class="t last">16:00<small>운정중앙역<br>2번 출구</small></div>
   </div>
+  <div class="note"><p><b>승하차 장소</b></p><p>🚏 <b>운정중앙역</b> 2번 출구<br>🚏 <b>문산역</b> 1번 출구<br>🚏 <b>율곡연수원</b> 본원 앞 주차장</p></div>
  </div>
 </section>
 
@@ -500,6 +504,7 @@ p{margin-bottom:12px}
  <div class="wrap">
   <h3 style="margin-bottom:12px">🚌 셔틀버스 이용 유의사항</h3>
   <ul class="list">
+   <li><b>승하차 장소</b>는 <b>운정중앙역 2번 출구</b>, <b>문산역 1번 출구</b>, <b>율곡연수원 본원 앞 주차장</b>입니다.</li>
    <li><b>1일차 퇴근 버스는 운행하지 않습니다.</b></li>
    <li>버스는 운행 시각이 되면 <b>탑승 인원을 기다리지 않고 즉시 출발</b>합니다.</li>
    <li>도로 상황 등에 따라 운행 시각이 다소 지연될 수 있습니다.</li>
