@@ -8,14 +8,16 @@
 :root{--bg:#0e1116;--fg:#f2f4f8;--dim:#6b7585;--acc:#ffd54a;--cue:#6fd3ff;--note:#9aa7b8;--bar:#171c24;--line:#2a3340;--fs:44px}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo",sans-serif;-webkit-text-size-adjust:100%}
-#top{position:fixed;left:0;right:0;top:0;z-index:5;background:var(--bar);border-bottom:1px solid var(--line);padding:8px 14px;display:flex;gap:12px;align-items:center;font-size:15px}
-#top b{font-size:17px}
+#top{position:fixed;left:0;right:0;top:0;z-index:5;background:var(--bar);border-bottom:1px solid var(--line);padding:5px 10px;display:flex;gap:10px;align-items:center;font-size:13px;line-height:1.2}
+#top b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+#top .tm{white-space:nowrap;font-size:12px}
 #top .sp{flex:1}
 #top .tm{font-variant-numeric:tabular-nums;color:var(--acc)}
-#stage{padding:38vh 6vw 60vh;max-width:1400px;margin:0 auto}
+#stage{padding:32vh 5vw 60vh;max-width:1400px;margin:0 auto}
 .sec{margin:0 0 5vh}
 .sec>h2{font-size:calc(var(--fs)*.6);color:var(--acc);margin:7vh 0 2vh;padding-bottom:1vh;border-bottom:2px solid var(--line);font-weight:700}
 .sec>h2 small{font-size:.7em;color:var(--dim);font-weight:400;margin-left:.6em}
+.sec:first-child>h2{margin-top:0}
 h3.sub{font-size:calc(var(--fs)*.55);color:var(--cue);margin:4vh 0 1.5vh}
 .ln{font-size:var(--fs);line-height:1.6;margin:0 0 .75em;opacity:.38;transition:opacity .15s;word-break:keep-all;overflow-wrap:break-word}
 .ln.cur{opacity:1}
@@ -30,13 +32,17 @@ h3.sub{font-size:calc(var(--fs)*.55);color:var(--cue);margin:4vh 0 1.5vh}
 .note{font-size:calc(var(--fs)*.45);line-height:1.5;color:var(--note);border:1px dashed var(--dim);border-radius:10px;padding:.5em .8em;margin:0 0 1em}
 body.hidecue .cue,body.hidecue .note{display:none}
 .blank{background:var(--acc);color:#000;border-radius:6px;padding:0 .4em}
-#bar{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--bar);border-top:1px solid var(--line);padding:8px 10px calc(8px + env(safe-area-inset-bottom));display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
-#bar button{background:#232b36;color:var(--fg);border:1px solid var(--line);border-radius:12px;font-size:16px;padding:12px 16px;min-width:48px;cursor:pointer}
+#bar{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--bar);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom));display:flex;gap:6px;align-items:center;justify-content:center}
+#bar button{background:#232b36;color:var(--fg);border:1px solid var(--line);border-radius:10px;font-size:15px;padding:8px 12px;min-width:44px;height:40px;cursor:pointer}
 #bar button:active{background:#33404f}
-#bar button.go{background:var(--acc);color:#000;font-weight:700;min-width:96px}
-#bar .grp{display:flex;gap:6px;align-items:center;font-size:14px;color:var(--note)}
-#bar .grp span.v{min-width:3.4em;text-align:center;color:var(--fg);font-variant-numeric:tabular-nums}
-#guide{position:fixed;left:0;right:0;top:38vh;height:0;border-top:2px solid rgba(255,213,74,.55);z-index:3;pointer-events:none}
+#bar button.go{background:var(--acc);color:#000;font-weight:700;flex:0 0 96px}
+#panel{position:fixed;left:8px;right:8px;bottom:calc(58px + env(safe-area-inset-bottom));z-index:7;background:var(--bar);border:1px solid var(--line);border-radius:14px;padding:10px 12px;display:none;max-width:560px;margin:0 auto}
+#panel.on{display:block}
+#panel .row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 0;font-size:15px;color:var(--note)}
+#panel .row .c{display:flex;align-items:center;gap:6px}
+#panel button{background:#232b36;color:var(--fg);border:1px solid var(--line);border-radius:10px;font-size:16px;min-width:44px;height:40px;cursor:pointer}
+#panel .v{min-width:4.2em;text-align:center;color:var(--fg);font-variant-numeric:tabular-nums}
+#guide{position:fixed;left:0;right:0;top:32vh;height:0;border-top:2px solid rgba(255,213,74,.55);z-index:3;pointer-events:none}
 #guide::before{content:"▶";position:absolute;left:4px;top:-14px;color:var(--acc);font-size:20px}
 #toc{position:fixed;inset:0;z-index:9;background:rgba(0,0,0,.72);display:none}
 #toc.on{display:block}
@@ -47,7 +53,7 @@ body.hidecue .cue,body.hidecue .note{display:none}
 #toc h4{margin:14px 14px 4px;color:var(--acc);font-size:14px}
 #toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:var(--acc);color:#000;font-weight:700;padding:10px 18px;border-radius:12px;z-index:8;display:none;max-width:90vw;text-align:center}
 #help{font-size:13px;color:var(--dim);text-align:center;padding:0 10px 6px;width:100%}
-@media (max-width:700px){:root{--fs:30px}#top{font-size:13px}#bar button{padding:10px 12px;font-size:15px}#help{display:none}}
+@media (max-width:700px){#stage{padding-left:3.5vw;padding-right:3.5vw}.ln{line-height:1.5}}
 </style>
 </head>
 <body>
@@ -56,16 +62,18 @@ body.hidecue .cue,body.hidecue .note{display:none}
 <main id="stage"></main>
 <div id="toast"></div>
 <div id="toc"><div class="box" id="tocBox"></div></div>
+<div id="panel">
+ <div class="row">속도<span class="c"><button id="sMinus">−</button><span class="v" id="sVal"></span><button id="sPlus">＋</button></span></div>
+ <div class="row">이 구간 시간<span class="c"><button id="tMinus">−</button><span class="v" id="tVal"></span><button id="tPlus">＋</button><button id="tReset" title="기본값">↺</button></span></div>
+ <div class="row">글자 크기<span class="c"><button id="fMinus">A−</button><span class="v" id="fVal"></span><button id="fPlus">A＋</button></span></div>
+ <div class="row">지시문·메모<span class="c"><button id="bCue">보기</button></span></div>
+</div>
 <div id="bar">
- <div id="help">스페이스: 재생/정지 · ←→: 이전/다음 구간 · ↑↓: 이전/다음 멘트 · +/-: 속도 · 화면을 직접 스크롤하면 자동 정지</div>
- <button id="bToc" title="목차">☰ 목차</button>
+ <button id="bToc" title="목차">☰</button>
  <button id="bPrev" title="이전 구간">⏮</button>
  <button id="bPlay" class="go">▶ 재생</button>
  <button id="bNext" title="다음 구간">⏭</button>
- <div class="grp">속도 <button id="sMinus">−</button><span class="v" id="sVal"></span><button id="sPlus">＋</button></div>
- <div class="grp">구간시간 <button id="tMinus">−</button><span class="v" id="tVal"></span><button id="tPlus">＋</button><button id="tReset" title="구간 시간 기본값">↺</button></div>
- <div class="grp">글자 <button id="fMinus">A−</button><button id="fPlus">A＋</button></div>
- <button id="bCue" title="지시문·메모 보기/숨기기">지시문</button>
+ <button id="bSet" title="설정">⚙</button>
 </div>
 
 <script type="text/plain" id="src">
@@ -246,7 +254,7 @@ x 3일간의 여정을 따뜻하게 마무리해 주신 원장님, 감사드립�
 var $=function(i){return document.getElementById(i)};
 var stage=$('stage'),guide=$('guide');
 var CUE_SEC=2, HEAD_SEC=1.5, SUB_SEC=.8;
-var S={cps:5,fs:44,cue:true};
+var S={cps:5,fs:(window.innerWidth<700?34:44),cue:true};
 try{var j=JSON.parse(localStorage.getItem('prompter')||'{}');if(j.cps)S.cps=j.cps;if(j.fs)S.fs=j.fs;if(j.cue===false)S.cue=false}catch(e){}
 function save(){try{localStorage.setItem('prompter',JSON.stringify(S))}catch(e){}}
 
@@ -308,7 +316,7 @@ function recompute(){
 function fmt(sec){sec=Math.max(0,Math.round(sec));var m=Math.floor(sec/60),s=sec%60;return m+':'+(s<10?'0':'')+s}
 
 /* ---- 좌표 ---- */
-function markerY(){return window.innerHeight*0.38}
+function markerY(){return window.innerHeight*0.32}
 function elTop(it){return it.el.getBoundingClientRect().top+window.scrollY}
 function elH(it){return it.el.getBoundingClientRect().height}
 var T=0,playing=false,last=0,raf=0,autoScroll=false;
@@ -339,7 +347,7 @@ function sync(){
   if(curSec!==best.sec){curSec=best.sec;$('curTitle').textContent=curSec.title+(curSec.time?'  ·  '+curSec.time:'');tocMark()}
   var s=best.sec,tt=tForScroll();
   var done=Math.min(Math.max(tt-s.start,0),s.end-s.start);
-  $('secInfo').textContent='구간 '+fmt(done)+' / '+fmt(s.end-s.start)+'  ·  남은 '+fmt(s.end-s.start-done);
+  $('secInfo').textContent=fmt(done)+' / '+fmt(s.end-s.start);
   $('tVal').textContent=fmt(secDur(s));
   $('sVal').textContent=S.cps.toFixed(1)+'자/초';
 }
@@ -400,16 +408,19 @@ function chTarget(d){
   recompute();T=s.start+frac*(s.end-s.start);setScroll(scrollForT(T));sync();tocBuild();
 }
 function resetTarget(){var s=curSec;var tt=tForScroll();var frac=(tt-s.start)/Math.max(1,s.end-s.start);s.target=null;recompute();T=s.start+frac*(s.end-s.start);setScroll(scrollForT(T));sync();tocBuild()}
-$('bPlay').onclick=function(){setPlaying(!playing)};
+$('bPlay').onclick=function(){$('panel').classList.remove('on');setPlaying(!playing)};
 $('bNext').onclick=function(){goSec(secIndex()+1)};
 $('bPrev').onclick=function(){var s=curSec;goSec(secIndex()-(elTop(s.items[0])<window.scrollY+markerY()-60?0:1))};
 $('sMinus').onclick=function(){chSpeed(-.5)};$('sPlus').onclick=function(){chSpeed(.5)};
 $('tMinus').onclick=function(){chTarget(-15)};$('tPlus').onclick=function(){chTarget(15)};$('tReset').onclick=resetTarget;
-function setFs(){document.documentElement.style.setProperty('--fs',S.fs+'px');save()}
-$('fMinus').onclick=function(){var t=tForScroll();S.fs=Math.max(24,S.fs-4);setFs();setScroll(scrollForT(t));sync()};
-$('fPlus').onclick=function(){var t=tForScroll();S.fs=Math.min(96,S.fs+4);setFs();setScroll(scrollForT(t));sync()};
-$('bCue').onclick=function(){S.cue=!S.cue;document.body.classList.toggle('hidecue',!S.cue);$('bCue').style.opacity=S.cue?1:.5;save();setTimeout(sync,0)};
-document.body.classList.toggle('hidecue',!S.cue);$('bCue').style.opacity=S.cue?1:.5;
+function setFs(){document.documentElement.style.setProperty('--fs',S.fs+'px');$('fVal').textContent=S.fs;save()}
+$('fMinus').onclick=function(){var t=tForScroll();S.fs=Math.max(22,S.fs-2);setFs();setScroll(scrollForT(t));sync()};
+$('fPlus').onclick=function(){var t=tForScroll();S.fs=Math.min(96,S.fs+2);setFs();setScroll(scrollForT(t));sync()};
+function cueBtn(){$('bCue').textContent=S.cue?'보기':'숨김'}
+$('bCue').onclick=function(){S.cue=!S.cue;document.body.classList.toggle('hidecue',!S.cue);cueBtn();save();setTimeout(sync,0)};
+document.body.classList.toggle('hidecue',!S.cue);cueBtn();
+$('bSet').onclick=function(){$('panel').classList.toggle('on')};
+stage.addEventListener('click',function(){$('panel').classList.remove('on')});
 setFs();
 
 /* ---- 목차 ---- */
