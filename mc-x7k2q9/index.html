@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow"><title>사회자 프롬프터</title>
+<style>
+:root{--bg:#0e1116;--fg:#f2f4f8;--dim:#6b7585;--acc:#ffd54a;--cue:#6fd3ff;--note:#9aa7b8;--bar:#171c24;--line:#2a3340;--fs:44px}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo",sans-serif;-webkit-text-size-adjust:100%}
+#top{position:fixed;left:0;right:0;top:0;z-index:5;background:var(--bar);border-bottom:1px solid var(--line);padding:8px 14px;display:flex;gap:12px;align-items:center;font-size:15px}
+#top b{font-size:17px}
+#top .sp{flex:1}
+#top .tm{font-variant-numeric:tabular-nums;color:var(--acc)}
+#stage{padding:38vh 6vw 60vh;max-width:1400px;margin:0 auto}
+.sec{margin:0 0 5vh}
+.sec>h2{font-size:calc(var(--fs)*.6);color:var(--acc);margin:7vh 0 2vh;padding-bottom:1vh;border-bottom:2px solid var(--line);font-weight:700}
+.sec>h2 small{font-size:.7em;color:var(--dim);font-weight:400;margin-left:.6em}
+h3.sub{font-size:calc(var(--fs)*.55);color:var(--cue);margin:4vh 0 1.5vh}
+.ln{font-size:var(--fs);line-height:1.6;margin:0 0 .75em;opacity:.38;transition:opacity .15s;word-break:keep-all;overflow-wrap:break-word}
+.ln.cur{opacity:1}
+.ln.sub{padding-left:.9em;font-size:calc(var(--fs)*.88)}
+.ln.oth{font-style:italic;color:#c7d0dc;border-left:6px solid var(--line);padding-left:.6em}
+.ln.alt{border-left:6px solid var(--acc);padding-left:.6em}
+.ln.alt::before{content:"택1";font-size:.4em;background:var(--acc);color:#000;padding:.1em .5em;border-radius:6px;margin-right:.6em;vertical-align:middle;font-style:normal}
+.ln.skip{text-decoration:line-through;color:var(--dim)}
+.ln.skip::before{content:"생략";font-size:.4em;text-decoration:none;display:inline-block;background:var(--line);color:var(--fg);padding:.1em .5em;border-radius:6px;margin-right:.6em;vertical-align:middle}
+.cue{display:inline-block;font-size:calc(var(--fs)*.55);line-height:1.4;color:#001;background:var(--cue);border-radius:10px;padding:.2em .7em;margin:0 0 1em;font-weight:700;opacity:.55}
+.cue.cur{opacity:1}
+.note{font-size:calc(var(--fs)*.45);line-height:1.5;color:var(--note);border:1px dashed var(--dim);border-radius:10px;padding:.5em .8em;margin:0 0 1em}
+body.hidecue .cue,body.hidecue .note{display:none}
+.blank{background:var(--acc);color:#000;border-radius:6px;padding:0 .4em}
+#bar{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--bar);border-top:1px solid var(--line);padding:8px 10px calc(8px + env(safe-area-inset-bottom));display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+#bar button{background:#232b36;color:var(--fg);border:1px solid var(--line);border-radius:12px;font-size:16px;padding:12px 16px;min-width:48px;cursor:pointer}
+#bar button:active{background:#33404f}
+#bar button.go{background:var(--acc);color:#000;font-weight:700;min-width:96px}
+#bar .grp{display:flex;gap:6px;align-items:center;font-size:14px;color:var(--note)}
+#bar .grp span.v{min-width:3.4em;text-align:center;color:var(--fg);font-variant-numeric:tabular-nums}
+#guide{position:fixed;left:0;right:0;top:38vh;height:0;border-top:2px solid rgba(255,213,74,.55);z-index:3;pointer-events:none}
+#guide::before{content:"▶";position:absolute;left:4px;top:-14px;color:var(--acc);font-size:20px}
+#toc{position:fixed;inset:0;z-index:9;background:rgba(0,0,0,.72);display:none}
+#toc.on{display:block}
+#toc .box{position:absolute;left:50%;top:6vh;bottom:6vh;transform:translateX(-50%);width:min(760px,94vw);background:var(--bar);border:1px solid var(--line);border-radius:16px;overflow:auto;padding:10px}
+#toc a{display:flex;gap:10px;justify-content:space-between;padding:12px 14px;border-radius:10px;color:var(--fg);text-decoration:none;font-size:17px;cursor:pointer}
+#toc a:hover,#toc a.now{background:#232b36}
+#toc a small{color:var(--dim);white-space:nowrap}
+#toc h4{margin:14px 14px 4px;color:var(--acc);font-size:14px}
+#toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:var(--acc);color:#000;font-weight:700;padding:10px 18px;border-radius:12px;z-index:8;display:none;max-width:90vw;text-align:center}
+#help{font-size:13px;color:var(--dim);text-align:center;padding:0 10px 6px;width:100%}
+@media (max-width:700px){:root{--fs:30px}#top{font-size:13px}#bar button{padding:10px 12px;font-size:15px}#help{display:none}}
+</style>
+</head>
+<body>
+<div id="top"><b id="curTitle">사회자 프롬프터</b><span class="sp"></span><span id="secInfo" class="tm"></span></div>
+<div id="guide"></div>
+<main id="stage"></main>
+<div id="toast"></div>
+<div id="toc"><div class="box" id="tocBox"></div></div>
+<div id="bar">
+ <div id="help">스페이스: 재생/정지 · ←→: 이전/다음 구간 · ↑↓: 이전/다음 멘트 · +/-: 속도 · 화면을 직접 스크롤하면 자동 정지</div>
+ <button id="bToc" title="목차">☰ 목차</button>
+ <button id="bPrev" title="이전 구간">⏮</button>
+ <button id="bPlay" class="go">▶ 재생</button>
+ <button id="bNext" title="다음 구간">⏭</button>
+ <div class="grp">속도 <button id="sMinus">−</button><span class="v" id="sVal"></span><button id="sPlus">＋</button></div>
+ <div class="grp">구간시간 <button id="tMinus">−</button><span class="v" id="tVal"></span><button id="tPlus">＋</button><button id="tReset" title="구간 시간 기본값">↺</button></div>
+ <div class="grp">글자 <button id="fMinus">A−</button><button id="fPlus">A＋</button></div>
+ <button id="bCue" title="지시문·메모 보기/숨기기">지시문</button>
+</div>
+
+<script type="text/plain" id="src">
+# 입교식 · 행사 전 안내 | 10/21(수) 09:30
+○ 연수생 여러분께서는 자리를 정돈하여 주시기 바랍니다.
+○ 원활한 연수 진행을 위해 소지하고 계신 휴대폰은 전원을 꺼 주시거나, 무음 또는 진동 모드로 전환해주시기 바랍니다.
+○ 오랜 시간 각자의 자리에서 쌓아 오신 노력이 5급 승진이라는 값진 결실로 이어졌습니다. 진심으로 축하드립니다.
+○ 이번 2박 3일간의 연수는 나를 돌아보고(Lead Yourself), 경기교육의 내일을 그려보며(Lead the Future), 동료와 함께 이끄는 법(Lead Together)을 배우는 시간으로 준비했습니다.
+○ 이곳에서 만난 동기들이 앞으로의 공직 여정에서 가장 든든한 동반자가 되기를 바랍니다.
+# 식순 안내 | 3분
+○ 잠시 후 입교식을 시작하기 전에 식순을 안내 드리겠습니다.
+- 국민의례: 국기에 대한 경례 - 애국가 1절 제창 – 순국선열 및 호국영령에 대한 묵념 (거동이 불편하신 분에 대한 안내 예정임)
+- 부장님의 간부직원 소개, 원장님 인사말씀(대독), 폐회
+- 전체 사진촬영(외부, 본관 계단) 후 다시 착석하여 연수 전반에 대한 안내
+x 행사 시작 – 생략 (2분)
+x 원장님이 입장하십니다. 연수생 여러분께서는 자리를 정돈해 주시기 바랍니다.
+x (원장님 입장)
+# Ⅰ. 개회사 | 09:35
+> 자리에서 나와 원장님께(부재 시 내빈석을 향해) 인사
+○ 지금부터「2026년 5급 승진예정자 연수 입교식」을 시작하겠습니다.
+# Ⅱ. 국민의례 (정식절차2)
+○ 먼저 국민의례를 하겠습니다. 모두 자리에서 일어나 정면에 있는 국기를 향해 주시기 바랍니다. 거동이 불편한 분들은 자리에 앉은 채로 예를 갖추어 주시기 바랍니다.
+○ 국기에 대하여, 경례!
+○ 다음은 애국가를 제창하겠습니다. 반주에 맞춰 힘차게 불러주시기 바랍니다.
+> 애국가 1절 연주 재생
+> 멘트 후 돌아서서 함께 부르고 제자리로
+○ 이어서, 순국선열과 호국영령에 대한 묵념을 올리겠습니다. 일동 묵념
+> 묵념곡 재생
+> 바로
+○ 모두 자리에 앉아 주시기 바랍니다.
+# Ⅲ. 간부직원 소개 및 인사말씀
+○ 다음은 우리 연수원 구순이 행정연수부장님께서 간부직원을 소개해 주시겠습니다.
+> 간부직원 소개 (행정연수부장)
+※ 김영훈 원장님은 미래인재 성장과정 연수의 해외순방 일정으로 부재 중임
+◇ (행정연수부장) 반갑습니다. 행정연수부장 구순이입니다. 함께하신 간부직원을 소개해 드리겠습니다.
+※ 김경관 정책기획관, 수행원 영접 및 안내, 점심식사 추진 : 신희숙 과장님
+○ 이어서 오늘 원장님께서 해외 연수 일정으로 함께 하지 못하신 관계로 원장님의 인사말씀을 구순이 행정연수부장님께서 대독해 주시겠습니다.
+> 원장님 말씀 대독 (행정연수부장)
+○ 원장님의 따뜻한 축하와 격려 말씀을 전해 주신 행정연수부장님, 감사드립니다.
+# Ⅳ. 폐회사 및 기념촬영
+○ 이상으로「2026년 5급 승진예정자 연수 입교식」을 모두 마치겠습니다.
+○ 다음으로 사진 촬영이 있겠습니다. 사진 촬영 후에 연수생 여러분들은 모두 자리로 다시 돌아와 주시기 바랍니다. 이후 연수 전반에 대해 안내 드리도록 하겠습니다.
+○ 그럼, 사진 촬영을 위해 간부직원과 연수생 여러분은 본관 앞 계단으로 이동 부탁드리겠습니다.
+> 기념촬영
+# Ⅴ. 연수 전체 안내
+○ 우리 원에서의 연수는 단순한 강의 중심의 교육이 아니라, 서로의 경험을 나누고 배우는 참여형 연수로 운영됩니다. 모든 강의와 활동에 적극적으로 참여해 주시길 부탁드립니다.
+- ▸ 식사: 조식 7:30~7:50, 중식 11:50~12:20, 석식 16:50~17:20 / 2일차 중식은 외부
+- ▸ 생활관은 점심 식사 후 입실 안내, 야간 긴급상황은 당직실(031-950-0099)
+- ▸ 이수 기준: 총 18시간의 90% 이상 출석
+- ▸ 기타 안내 페이지의 내용 안내
+# 1일차 ① 경기교육 대전환과 5대 핵심정책의 이해 | 10:00~12:00
+○ 이어서 ‘경기교육 대전환과 5대 핵심정책의 이해’ 강의가 진행됩니다. 강의는 경기도교육청 김경관 정책기획관님께서 진행해 주시겠습니다.
+○ 정책기획관님은 안양교육지원청 교육장을 역임하시고, 민선6기 경기도교육감직인수위원회에서 교육자치분과 전문위원으로서 경기교육 대전환의 정책 방향과 과제 설계에 앞장서신 분으로, RAS 교육 등 경기도교육청 핵심정책의 방향과 현장 안착을 위한 행정지원 과제를 들려주실 예정입니다. 큰 박수로 모시겠습니다.
+> (강의 종료)
+○ 정책은 문서 속에서 완성되는 것이 아니라, 현장에서 실천하는 여러분의 손끝에서 비로소 살아나는 것이라 생각합니다. 열띤 강의를 해 주신 김경관 정책기획관님께 감사의 박수 부탁드립니다.
+○ 점심 식사 맛있게 하시고, 13시에 강의가 시작되오니 5분 전까지 착석 부탁드리겠습니다. 점심 식사 후에는 생활관 입실이 가능합니다.
+# 1일차 ② 마음 근력 키우기 | 13:00~15:00
+○ 점심식사 맛있게 드셨나요? 이번 시간은 새로운 역할 앞에서 나를 돌보고 단단하게 세우는 ‘마음 근력 키우기’ 강의입니다.
+○ 이번 시간은 경기도교육청교직원복지센터 마음건강사업부에서 교직원의 마음건강과 정서회복을 위해 운영하는 프로그램입니다. 경기도교육청교직원복지센터에서는 심리상담을 비롯해 다양한 마음건강 프로그램과 교직원 복지사업을 지원하고 있으며, 이번 연수에서는 5급 승진예정자 여러분들의 마음을 돌볼 수 있는 프로그램을 마련해 주었습니다. 이 시간만큼은 업무에서 잠시 벗어나 편안하게 쉬어가는 시간이 되시길 바랍니다.
+○ 강의는 더 프레젠트 마음연구소 조은이 소장님께서 진행해 주시겠습니다. 큰 박수 부탁드립니다.
+> (강의 종료)
+○ 다른 사람을 이끌기 전에 먼저 나를 돌보는 일이 얼마나 소중한지 느끼셨으리라 생각합니다. 조은이 소장님께 큰 박수 부탁드립니다.
+## 분임 이동 안내 · 2일차 안내
+○ 잠시 휴식 후 오후 세시부터는 선배 사무관님과의 대화가 이어집니다.
+○ 2024~2025년에 이 과정을 먼저 거쳐 지금 현장에서 활약 중인 선배 사무관 다섯 분을 모셨습니다.
+○ 특히 11월 2일부터 4주간 참여하실 대구 중앙교육연수원 과정의 평가와 생활에 대해서도 생생한 이야기를 들으실 수 있을 것입니다.
+○ 선배님들은 각 분임실에서 기다리고 계시니, 휴식 후 안내 페이지의 분임 번호를 확인하시고 15시까지 본인 분임실로 이동해 주시기 바랍니다. 1분임은 이 곳 대강당에서 수업을 진행하고, 2분임부터 4분임까지는 옆의 분임실에서 수업을 진행합니다. 5분임은 구름다리를 건너서 행정연수부가 있는 후관동 2층의 행복누리에서 수업을 진행합니다.
+○ 분임별 대화가 끝나면 오늘 일정은 모두 종료됩니다. 이 곳에서 다시 모이지 않고, 바로 저녁 식사와 자율활동을 하시면 됩니다.
+○ 중요사항 말씀드리겠습니다. 내일은 이 곳 대강당을 다른 연수생들이 이용하기 때문에, 오늘 대강당에서는 개인 소지품을 모두 가져가셔야 합니다.
+○ 내일 저희가 대강당에서 모일 수 없고 오전부터 분반 수업이 진행된 뒤 외부 체험 일정이 예정되어 있습니다. 따라서, 내일 일정도 먼저 안내해 드리겠습니다.
+○ 오전 9시부터 ‘AI로 바꾸는 일하기 방식’ 실습이 3개 분반으로 진행됩니다. 연수번호 1번부터 32번은 1분반, 33번부터 64번은 2분반, 65번부터 97번은 3분반입니다. 강의실은 모두 후관동에 있으며, 1분반은 제1컴퓨터실, 2분반은 행복누리, 3분반은 제2컴퓨터실에서 수업을 진행합니다. 강의실 위치는 안내 페이지에서 확인하실 수 있습니다. 8시 50분까지 각 강의실에서 등록을 마쳐 주시기 바랍니다.
+○ 오전 수업이 끝나면 분반별로 버스를 타고 식사 장소로 이동합니다. 이동에는 30분 정도 걸리고, 12시 10분쯤 점심 식사와 티타임을 가질 예정입니다.
+○ 식사 후에는 차량으로 10분 정도 이동해 파주장단콩웰빙마루에 모인 뒤, 2개 조로 나누어 장단콩 된장 만들기 체험과 오두산 통일전망대 관람을 번갈아 진행합니다.
+○ 내일 오전은 수업부터 점심 이동까지 일정이 다소 빠듯합니다. 수업 시간에 늦지 않도록 부탁드립니다. 그리고 휴식 시간에 미리 미리 화장실을 다녀와 주시면 일정이 원활하게 진행될 수 있습니다. 협조 부탁드립니다.
+○ 자세한 일정과 안내 사항은 안내 페이지에 모두 나와 있으니 참고해 주시고, 궁금한 점은 언제든 운영진에게 말씀해 주시기 바랍니다.
+※ 강사 사무관님들은 박민정 보조강사님이 강사대기실 및 각 분임실에 안내
+# 1일차 ③ 사무관의 갈 길, 선배에게 묻다 | 15:00~17:00
+> 분임별로 개별 진행, 이후 종료
+# 2일차 ① AI로 바꾸는 일하기 방식 | 09:00~12:00 (3개 분반)
+> 개별 강의실 별로 강사님들이 강의 진행
+※ 문철훈, 김서연, 보조강사 이지영, 3개 분반 각각 모니터링 진행
+# 2일차 ② 지역 현장탐방 · 식사 장소 도착 후 | 13:00~17:00
+※ 체험 일정 동행 간부님 의전 및 운영 총괄: 김진웅
+※ 호차별 인원 파악 및 동행: 1호차-김진웅/이인호, 2호차-문철훈/이지영, 3호차-윤준희/김서연, 별도차량-구순이/조규문/박효남
+※ 업체에서 진행 지원 예정 (2명) - 식당 대기
+> 식사 장소 도착 후 안내
+> 구순이 부장님 식사 시 인사말씀
+> 필요 시 사용
+○ 오전 수업 마치고 바로 이동하시느라 고생 많으셨습니다.
+○ 점심 식사 후에는 우리 연수원이 자리한 파주의 지역자원을 직접 체험하는 현장탐방이 이어집니다.
+○ 2개 조로 나누어 장단콩 된장 만들기 체험과 오두산 통일전망대 탐방을 번갈아 진행합니다. ‘벽깨기’의 관점에서 학교와 지역을 어떻게 이을 수 있을지 생각해 보시면서 참여해 주시기 바랍니다.
+※ 식사 후 별도 차량은 연수원으로 복귀
+# 2일차 ③ 복귀 후 마무리 안내
+○ 오늘 진행된 일정이 굉장히 바쁘게 진행되서 힘드셨죠? 그래도 평소에 해 보지 못 했던 특별하고 즐거운 경험이 되셨으리라 생각합니다.
+○ 저녁식사 하시고, 푹 쉬시기 바랍니다. 내일 강의는 2층 대강당에서 9시에 진행됩니다. 8시 50분까지 꼭 등록 부탁드립니다.
+○ 또한, 내일 아침에는 사전 안내드린 바와 같이 모두 짐정리를 하시고 등록대에서 등록 시 방키를 반납하여 퇴실 절차를 완료해 주시기 바랍니다. 내일 뵙겠습니다. 고생 많으셨습니다!
+# 3일차 원장님 인사말씀 | 09:00 (3분 내외)
+○ 첫 일정에 앞서 원장님의 인사말씀이 있겠습니다. 원장님을 모시겠습니다.
+> 원장님 입장
+○ 경기도교육청율곡연수원 김영훈 원장님의 인사말씀을 듣겠습니다.
+> 원장님 인사말씀
+○ 따뜻한 격려의 말씀을 전해 주신 원장님께 감사의 박수 부탁드립니다.
+> 원장님 퇴장
+# 3일차 ① 다름을 읽고 관계를 이끄는 리더십 | 09:00~11:00
+○ 마지막 날 첫 강의는 ‘다름을 읽고 관계를 이끄는 리더십’입니다.
+○ 퍼스트교육컨설팅 정재일 대표님은 다수의 공직 리더십 과정에서 소통·갈등관리 강의를 해오신 분으로, 세대와 경험, 기준의 차이에서 생기는 갈등을 이해하고 나의 소통 유형을 직접 점검해 보는 시간을 마련해 주십니다. 따뜻한 박수로 강사님을 모시겠습니다.
+> (강의 종료)
+○ 오늘 강의시간에 점검해 본 여러분의 소통 유형이 현장에서 더 좋은 말 한마디로 이어지기를 바랍니다. 정재일 대표님께 감사의 박수 부탁드립니다.
+○ 잠시 휴식 시간을 가진 뒤에는 경기도교육청 지방공무원 인사과장님께서 리더십 관련 연수를 진행해 주실 예정입니다. 11시까지 자리해 주시기 바랍니다.
+# 3일차 ② 함께 이끄는 리더로 | 11:00~12:00
+※ 조완석 과장님 및 수행원 영접 및 안내: 박경성 과장님
+○ 다음은 경기도교육청 지방공무원 인사 업무를 총괄하고 계신 조완석 지방공무원인사과장님을 모시고, ‘일 잘하는 사무관’이란 무엇인지, 사무관에게 요구되는 역량과 경기교육의 정책 방향을 들어보겠습니다. 큰 박수로 모시겠습니다.
+> (강의 종료)
+○ ‘일 잘하는 사무관은 조직이 잘하게 만드는 사람’이라는 말씀이 오래 남습니다. 사무관으로서의 첫걸음에 든든한 이정표가 되어 주신 과장님께 감사의 박수 부탁드립니다.
+○ 점심시간입니다. 식사 맛있게 하시고, 오후 한시 오분전까지 착석 부탁드립니다.
+# 3일차 ③ 5급, 새로운 시작을 꽃피우다 | 13:00~15:00
+○ 수료에 앞서 5급으로서의 새 출발을 꽃으로 표현해 보는 ‘5급, 새로운 시작을 꽃피우다’ 시간입니다.
+○ 오늘은 피어나 김보람 대표님과 함께 와인바구니 꽃꽂이를 해 보겠습니다. 높낮이와 깊이감, 꽃을 모아 꽂고 나누어 꽂는 그룹핑과 분산배치가 오늘의 포인트라고 합니다. 서로 다른 꽃이 어우러져 하나의 작품이 되듯, 서로 다른 사람들이 모여 조직이 완성된다는 점을 떠올리며 관리자로서의 다짐을 나눠 보시기 바랍니다.
+○ 칼과 가위를 사용하니 안전에 유의해 주시고, 대표님의 시연을 먼저 보신 뒤 따라 해 주시기 바랍니다. 큰 박수로 모시겠습니다.
+> (체험 종료)
+○ 오늘 만든 꽃처럼 여러분의 새로운 시작도 활짝 피어나길 바랍니다. 아름다운 시간을 만들어 주신 김보람 대표님께 감사의 박수 부탁드립니다.
+# 3일차 마무리 안내 | 수료식 직전
+○ 입교식 때 이곳에서 만난 동기들이 앞으로 든든한 동반자가 되기를 바란다고 말씀드렸습니다. 짧은 3일이었지만 배우신 것도, 함께 나눈 이야기도 많으셨기를 바랍니다.
+○ 수료식에 앞서 화면의 QR 코드로 연수 만족도 설문에 참여해 주시기 바랍니다. 다음 과정을 준비하는 데 큰 도움이 됩니다. 일주일 뒤에는 현업적용도 설문도 안내드릴 예정입니다.
+○ 귀가 하실 때에는 두고 가시는 물건이 없는지 확인해 주시기 바랍니다.
+○ 수료식이 끝나면 바로 귀가하시면 됩니다. 셔틀버스는 본원 앞 주차장에서 수료식 종료 시까지 대기할 예정이니, 버스를 이용하시는 분들은 수료식을 마치는 대로 탑승해 주시기 바랍니다.
+○ 수료식을 마친 뒤에는 인사드릴 시간이 없어서 먼저 인사드리겠습니다. 11월 2일부터 시작되는 대구 중앙교육연수원 과정도 건강하게 잘 마치시기를 응원하겠습니다. 3일간 함께해 주셔서 감사합니다.
+○ 그럼 자리에서 잠시만 대기해 주시기 바랍니다. 곧 수료식을 시작하겠습니다.
+# 수료식 · 행사 전 안내 | 10/23(금) 15:00
+○ 연수생 여러분께서는 자리를 정돈하여 주시기 바랍니다. 휴대폰은 무음이나 진동 모드로 전환해 주시기 바랍니다.
+# 수료식 · 식순 안내 | 2분
+○ 수료식을 시작하기 전에 간단히 식순을 안내해 드리겠습니다.
+- 국민의례(약식) 국기에 대한 경례 후 착석
+- 연수 경과보고, 수료증 수여
+- 단체 기념촬영 후 폐회
+○ 수료증은 연수생 대표께서 대표로 받으시고, 나머지 분들은 추후에 연수원 홈페이지에서 발급받으시기 바랍니다.
+# 수료식 · 원장님 입장 | 15:02
+○ 원장님께서 입장하십니다. 연수생 여러분께서는 큰 박수로 맞이해 주시기 바랍니다.
+> 원장님 입장 및 착석
+# 수료식 Ⅰ. 개회사
+> 자리에서 나와 원장님께 인사
+○ 지금부터「2026년 5급 승진예정자 과정 수료식」을 시작하겠습니다.
+# 수료식 Ⅱ. 국민의례 (약식)
+※ 수료식은 시간 관계상 애국가 제창과 묵념을 생략한 약식 국민의례로 진행
+○ 먼저 국민의례를 하겠습니다. 모두 자리에서 일어나 정면에 있는 국기를 향해 주시기 바랍니다. (거동이 불편한 분들은 자리에 앉은 채로 예를 갖추어 주시기 바랍니다.)
+○ 국기에 대하여, 경례!
+> 국기에 대한 경례곡 재생
+○ 바로! 모두 자리에 앉아 주시기 바랍니다.
+# 수료식 Ⅲ. 연수 경과보고
+○ 다음은 연수 경과보고가 있겠습니다.
+○ 이번 5급 승진예정자 과정은 10월 21일부터 23일까지 2박 3일간, 5급 승진예정자 97명을 대상으로 총 18시간 운영되었습니다.
+○ 연수생 여러분은 ‘나를 이끌다, 미래를 이끌다, 함께 이끌다’를 주제로 정책 이해, 마음 근력, 선배와의 대화, AI 실습, 현장탐방, 소통·갈등관리 리더십 등 과정 전반에 성실하고 적극적으로 임해 주셨습니다.
+? (전원 수료 시) 그 결과 이수 기준을 충족하여 97명 전원이 수료하게 되었습니다.
+? (일부 미이수 시) 연수생 97명 중 이수 기준(총 18시간 중 90% 이상 출석)을 충족한 (   )명이 수료하게 되었습니다.
+# 수료식 Ⅳ. 수료증 수여 (원장)
+○ 다음은 수료증 수여가 있겠습니다. 원장님께서는 단상으로 나와 주시기 바랍니다.
+○ 연수생 대표 강영식 님께서는 앞으로 나와 주시기 바랍니다.
+> 대표 연수생 단상 앞 이동, 쟁반 전달
+> 수료증 낭독
+◇ 수료증. 지방교육행정주사 강영식. 위 사람은 경기도교육청율곡연수원에서 실시한 2026년 5급 승진예정자 과정(18시간)을 수료하였으므로 이 증서를 수여합니다. 2026년 10월 23일 경기도교육청율곡연수원장.
+※ 실제 수료증과 내용 통일
+> 원장님 수여 → 악수 → 정면 사진 촬영
+○ 모든 연수생 여러분 서로의 노력에 축하의 박수를 부탁드립니다. 대표 연수생께서는 자리로 돌아가 주시기 바랍니다.
+※ 대표 수료자: 사전 안내 및 식 시작 전 간단히 리허설 진행할 것
+# 수료식 Ⅴ. 원장님 수료사 (생략)
+x 다음은 김영훈 원장님의 수료사가 있겠습니다.
+x 원장님 수료사 (별도 원고)
+x 3일간의 여정을 따뜻하게 마무리해 주신 원장님, 감사드립니다.
+# 수료식 Ⅵ. 폐회사
+○ 이상으로「2026년 5급 승진예정자 과정 수료식」을 모두 마치겠습니다.
+# 수료식 Ⅶ. 기념촬영
+○ 다음은 단체 기념촬영이 있겠습니다. 오늘 만드신 꽃을 하나씩 들고, 원장님과 간부직원, 연수생 여러분 모두 단상 앞으로 모여 주시기 바랍니다.
+> 단체 기념촬영
+</script>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var stage=$('stage'),guide=$('guide');
+var CUE_SEC=2, HEAD_SEC=1.5, SUB_SEC=.8;
+var S={cps:5,fs:44,cue:true};
+try{var j=JSON.parse(localStorage.getItem('prompter')||'{}');if(j.cps)S.cps=j.cps;if(j.fs)S.fs=j.fs;if(j.cue===false)S.cue=false}catch(e){}
+function save(){try{localStorage.setItem('prompter',JSON.stringify(S))}catch(e){}}
+
+/* ---- 원고 파싱 ---- */
+var secs=[],items=[],cur=null;
+function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function fmtText(t){return esc(t).replace(/\(\s{2,}\)/g,'<span class="blank">(&nbsp;&nbsp;&nbsp;&nbsp;)</span>')}
+function mk(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;e.innerHTML=html;return e}
+function newSec(title,time){
+  var sec=document.createElement('section');sec.className='sec';
+  var h=mk('h2','',esc(title)+(time?'<small>'+esc(time)+'</small>':''));sec.appendChild(h);
+  stage.appendChild(sec);
+  cur={id:secs.length,title:title,time:time,el:sec,head:h,items:[],target:null};
+  secs.push(cur);
+  add(h,'head',HEAD_SEC,0);
+}
+function add(el,kind,fix,chars){var it={el:el,kind:kind,fix:fix,chars:chars,sec:cur};cur.items.push(it);items.push(it);return it}
+$('src').textContent.split('\n').forEach(function(raw){
+  var l=raw.replace(/\s+$/,'');if(!l.trim())return;
+  var m;
+  if(l.charAt(0)==='#'&&l.charAt(1)===' '){var p=l.slice(2).split(' | ');newSec(p[0],p[1]||'');return}
+  if(l.slice(0,3)==='## '){var h=mk('h3','sub',esc(l.slice(3)));cur.el.appendChild(h);add(h,'sub',SUB_SEC,0);return}
+  var ch=l.charAt(0),body=l.slice(2);
+  var chars=body.replace(/\s/g,'').length;
+  if(ch==='○'){var e=mk('p','ln',fmtText(body));cur.el.appendChild(e);add(e,'say',0,chars)}
+  else if(ch==='-'){var e=mk('p','ln sub',fmtText(body));cur.el.appendChild(e);add(e,'say',0,chars)}
+  else if(ch==='◇'){var e=mk('p','ln oth',fmtText(body));cur.el.appendChild(e);add(e,'say',0,Math.round(chars*.8))}
+  else if(ch==='?'){var e=mk('p','ln alt',fmtText(body));cur.el.appendChild(e);add(e,'say',0,chars)}
+  else if(ch==='x'){var e=mk('p','ln skip',fmtText(body));cur.el.appendChild(e);add(e,'skip',0,0)}
+  else if(ch==='>'){var e=mk('div','cue',esc(body));cur.el.appendChild(e);add(e,'cue',CUE_SEC,0)}
+  else if(ch==='※'){var e=mk('div','note',esc(body));cur.el.appendChild(e);add(e,'note',0,0)}
+});
+
+/* ---- 시간 계산 ---- */
+function secStats(s){
+  var fix=0,chars=0;
+  s.items.forEach(function(it){fix+=it.fix;chars+=it.chars});
+  return {fix:fix,chars:chars};
+}
+function secBase(s){var st=secStats(s);return st.fix+st.chars/S.cps}
+function secDur(s){return s.target!=null?s.target:secBase(s)}
+var tl=[]; /* timeline per item: t0, d */
+var total=0;
+function recompute(){
+  var t=0;
+  secs.forEach(function(s){
+    var st=secStats(s);
+    var speech=Math.max(1,secDur(s)-st.fix);
+    s.start=t;
+    s.items.forEach(function(it){
+      var d=it.fix;
+      if(it.chars&&st.chars)d=speech*it.chars/st.chars;
+      it.t0=t;it.d=d;t+=d;
+    });
+    s.end=t;
+  });
+  total=t;
+}
+function fmt(sec){sec=Math.max(0,Math.round(sec));var m=Math.floor(sec/60),s=sec%60;return m+':'+(s<10?'0':'')+s}
+
+/* ---- 좌표 ---- */
+function markerY(){return window.innerHeight*0.38}
+function elTop(it){return it.el.getBoundingClientRect().top+window.scrollY}
+function elH(it){return it.el.getBoundingClientRect().height}
+var T=0,playing=false,last=0,raf=0,autoScroll=false;
+function scrollForT(t){
+  /* t -> 문서 y (마커가 놓일 위치) */
+  var it=null;
+  for(var i=0;i<items.length;i++){if(items[i].d>0&&t<items[i].t0+items[i].d){it=items[i];break}}
+  if(!it)it=items[items.length-1];
+  var f=it.d>0?(t-it.t0)/it.d:0;f=Math.min(1,Math.max(0,f));
+  return elTop(it)+f*elH(it);
+}
+function tForScroll(){
+  var y=window.scrollY+markerY(),best=items[0];
+  for(var i=0;i<items.length;i++){var it=items[i];if(elTop(it)<=y)best=it;else break}
+  var h=elH(best),f=h>0?(y-elTop(best))/h:0;f=Math.min(1,Math.max(0,f));
+  return best.t0+f*best.d;
+}
+function setScroll(y){autoScroll=true;window.scrollTo(0,y-markerY());setTimeout(function(){autoScroll=false},30)}
+
+/* ---- 현재 위치 표시 ---- */
+var curEl=null,curSec=null;
+function sync(){
+  var y=window.scrollY+markerY(),best=items[0];
+  for(var i=0;i<items.length;i++){if(elTop(items[i])<=y)best=items[i];else break}
+  var tgt=best;
+  if(best.kind==='note'||best.kind==='skip'){/* 메모는 직전 멘트 유지 */}
+  if(curEl!==tgt.el){if(curEl)curEl.classList.remove('cur');tgt.el.classList.add('cur');curEl=tgt.el}
+  if(curSec!==best.sec){curSec=best.sec;$('curTitle').textContent=curSec.title+(curSec.time?'  ·  '+curSec.time:'');tocMark()}
+  var s=best.sec,tt=tForScroll();
+  var done=Math.min(Math.max(tt-s.start,0),s.end-s.start);
+  $('secInfo').textContent='구간 '+fmt(done)+' / '+fmt(s.end-s.start)+'  ·  남은 '+fmt(s.end-s.start-done);
+  $('tVal').textContent=fmt(secDur(s));
+  $('sVal').textContent=S.cps.toFixed(1)+'자/초';
+}
+
+/* ---- 재생 ---- */
+function toast(msg){var t=$('toast');t.textContent=msg;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(function(){t.style.display='none'},2600)}
+function setPlaying(p){playing=p;$('bPlay').textContent=p?'⏸ 정지':'▶ 재생';cancelAnimationFrame(raf);if(p){T=tForScroll();last=performance.now();raf=requestAnimationFrame(tick)}}
+function tick(now){
+  if(!playing)return;
+  var dt=(now-last)/1000;last=now;
+  var s=curSec||secs[0];
+  T+=dt;
+  if(T>=s.end){T=s.end-0.001;setScroll(scrollForT(T));sync();setPlaying(false);var nx=secs[s.id+1];toast(nx?'구간 끝 · 다음: '+nx.title:'마지막 구간입니다');return}
+  setScroll(scrollForT(T));sync();
+  raf=requestAnimationFrame(tick);
+}
+function goSec(i){
+  i=Math.max(0,Math.min(secs.length-1,i));
+  var s=secs[i];setScroll(elTop(s.items[0])+4);T=s.start;sync();
+}
+function secIndex(){return curSec?curSec.id:0}
+function stepLine(dir){
+  var says=items.filter(function(it){return it.kind==='say'||it.kind==='cue'});
+  var y=window.scrollY+markerY()+2,idx=-1;
+  for(var i=0;i<says.length;i++){if(elTop(says[i])<=y)idx=i;else break}
+  var n=dir>0?idx+1:(elTop(says[Math.max(idx,0)])<y-6?idx:idx-1);
+  n=Math.max(0,Math.min(says.length-1,n));
+  setScroll(elTop(says[n]));sync();
+  if(playing)T=tForScroll();
+}
+['wheel','touchmove'].forEach(function(ev){window.addEventListener(ev,function(){if(playing)setPlaying(false)},{passive:true})});
+window.addEventListener('scroll',function(){if(!playing)sync()},{passive:true});
+window.addEventListener('keydown',function(e){
+  if(e.target.tagName==='INPUT')return;
+  var k=e.key;
+  if(k===' '||k==='Enter'){e.preventDefault();setPlaying(!playing)}
+  else if(k==='ArrowRight'||k==='PageDown'){e.preventDefault();goSec(secIndex()+1)}
+  else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();goSec(secIndex()-(function(){var s=curSec;return elTop(s.items[0])<window.scrollY+markerY()-60?0:1})())}
+  else if(k==='ArrowDown'){e.preventDefault();stepLine(1)}
+  else if(k==='ArrowUp'){e.preventDefault();stepLine(-1)}
+  else if(k==='+'||k==='='){chSpeed(.5)}
+  else if(k==='-'){chSpeed(-.5)}
+  else if(k==='Escape'){$('toc').classList.remove('on')}
+});
+
+/* ---- 컨트롤 ---- */
+function reflow(keep){
+  var tt=keep?tForScroll():0, id=curSec?curSec.id:0, f=0;
+  recompute();
+  if(keep){setScroll(scrollForT(Math.min(tt,total)));}
+  if(playing)T=tForScroll();
+  sync();tocBuild();
+}
+function chSpeed(d){S.cps=Math.min(12,Math.max(2,Math.round((S.cps+d)*10)/10));save();var s=curSec;var tt=tForScroll();var frac=(tt-s.start)/Math.max(1,s.end-s.start);recompute();T=s.start+frac*(s.end-s.start);setScroll(scrollForT(T));sync();tocBuild()}
+function chTarget(d){
+  var s=curSec;var tt=tForScroll();var frac=(tt-s.start)/Math.max(1,s.end-s.start);
+  var st=secStats(s);var v=Math.max(st.fix+10,secDur(s)+d);s.target=v;
+  recompute();T=s.start+frac*(s.end-s.start);setScroll(scrollForT(T));sync();tocBuild();
+}
+function resetTarget(){var s=curSec;var tt=tForScroll();var frac=(tt-s.start)/Math.max(1,s.end-s.start);s.target=null;recompute();T=s.start+frac*(s.end-s.start);setScroll(scrollForT(T));sync();tocBuild()}
+$('bPlay').onclick=function(){setPlaying(!playing)};
+$('bNext').onclick=function(){goSec(secIndex()+1)};
+$('bPrev').onclick=function(){var s=curSec;goSec(secIndex()-(elTop(s.items[0])<window.scrollY+markerY()-60?0:1))};
+$('sMinus').onclick=function(){chSpeed(-.5)};$('sPlus').onclick=function(){chSpeed(.5)};
+$('tMinus').onclick=function(){chTarget(-15)};$('tPlus').onclick=function(){chTarget(15)};$('tReset').onclick=resetTarget;
+function setFs(){document.documentElement.style.setProperty('--fs',S.fs+'px');save()}
+$('fMinus').onclick=function(){var t=tForScroll();S.fs=Math.max(24,S.fs-4);setFs();setScroll(scrollForT(t));sync()};
+$('fPlus').onclick=function(){var t=tForScroll();S.fs=Math.min(96,S.fs+4);setFs();setScroll(scrollForT(t));sync()};
+$('bCue').onclick=function(){S.cue=!S.cue;document.body.classList.toggle('hidecue',!S.cue);$('bCue').style.opacity=S.cue?1:.5;save();setTimeout(sync,0)};
+document.body.classList.toggle('hidecue',!S.cue);$('bCue').style.opacity=S.cue?1:.5;
+setFs();
+
+/* ---- 목차 ---- */
+function tocBuild(){
+  var h='<h4>구간 이동 (시간은 현재 속도 기준 예상)</h4>';
+  secs.forEach(function(s){h+='<a data-i="'+s.id+'"'+(curSec&&curSec.id===s.id?' class="now"':'')+'><span>'+esc(s.title)+'</span><small>'+(s.time?esc(s.time)+' · ':'')+'낭독 '+fmt(secDur(s))+(s.target!=null?' ✎':'')+'</small></a>'});
+  h+='<h4>전체 낭독 시간 합계 '+fmt(total)+'</h4>';
+  $('tocBox').innerHTML=h;
+}
+function tocMark(){var a=$('tocBox').querySelectorAll('a');for(var i=0;i<a.length;i++)a[i].classList.toggle('now',curSec&&+a[i].dataset.i===curSec.id)}
+$('bToc').onclick=function(){tocBuild();$('toc').classList.add('on')};
+$('toc').onclick=function(e){var a=e.target.closest('a');if(a){setPlaying(false);$('toc').classList.remove('on');goSec(+a.dataset.i)}else if(e.target.id==='toc'){$('toc').classList.remove('on')}};
+
+recompute();tocBuild();
+window.scrollTo(0,0);
+setTimeout(function(){goSec(0);window.scrollTo(0,0);sync()},50);
+window.addEventListener('resize',function(){sync()});
+})();
+</script>
+</body>
+</html>
