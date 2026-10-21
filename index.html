@@ -462,6 +462,90 @@ p{margin-bottom:12px}
  </div>
 </section>
 
+<!-- 지역 탐방 -->
+<section class="slide" id="tour" data-group="지역 탐방" data-title="호차 안내">
+ <div class="wrap">
+  <h2>🚍 지역 탐방 체험</h2>
+  <p class="muted" style="margin-top:-8px">10. 22.(목) 오후</p>
+  <p>버스 3대로 이동하며, <b>연수번호에 따라</b> 호차를 나눠 탑승합니다.</p>
+  <div class="cars">
+   <div class="car"><b>1호차</b><span>1 ~ 32번</span></div>
+   <div class="car"><b>2호차</b><span>33 ~ 64번</span></div>
+   <div class="car"><b>3호차</b><span>65 ~ 97번</span></div>
+  </div>
+  <p style="margin-top:14px">11:30 연수원 출발부터 16:10 연수원으로 출발할 때까지 위 호차로 탑승합니다.</p>
+  <p class="small muted">조별 체험 시 차량이 바뀔 수 있습니다. 자세한 이동 일정은 다음 장을 확인해 주세요.</p>
+ </div>
+</section>
+
+<section class="slide" id="detail" data-group="지역 탐방" data-title="상세 일정">
+ <div class="wrap">
+  <h2>🗓️ 탐방 상세 일정</h2>
+  <ol class="tl">
+   <li data-start="2026-10-22T11:30" data-end="2026-10-22T12:10"><time>11:30</time><b>경기도율곡교육연수원 출발</b><small>연수번호별 호차 탑승</small></li>
+   <li data-start="2026-10-22T12:10" data-end="2026-10-22T12:40"><time>12:10</time><b>로빈의 숲 도착 · 점심식사</b><small>메뉴: 모듬바베큐(삼겹살+돼지갈비+오리+쏘시지)</small></li>
+   <li data-start="2026-10-22T12:40" data-end="2026-10-22T13:30"><time>12:40</time><b>카페 로빈포레스트 · 티타임</b><small>마실 음료는 <span data-page="drink"></span>에서 미리 선택해 주세요.</small></li>
+   <li data-start="2026-10-22T13:30" data-end="2026-10-22T13:40"><time>13:30</time><b>장단콩웰빙마루로 이동</b><small>호차별 탑승</small></li>
+   <li data-start="2026-10-22T13:40" data-end="2026-10-22T14:00"><time>13:40</time><b>장단콩웰빙마루 주차장 도착</b></li>
+   <li data-start="2026-10-22T14:00" data-end="2026-10-22T16:10"><time>14:00</time><b>‘조’별 체험</b><small>다음 장의 조별 일정을 확인해 주세요.</small></li>
+   <li data-start="2026-10-22T16:10" data-end="2026-10-22T16:30"><time>16:10</time><b>집결 및 연수원으로 출발</b><small>호차별 탑승 후 이동</small></li>
+  </ol>
+ </div>
+</section>
+
+<section class="slide" id="drink" data-group="지역 탐방" data-title="음료 선택">
+ <div class="wrap">
+  <h2>☕ 음료 미리 선택</h2>
+  <p>탐방 중 <b>카페 로빈포레스트</b>(12:40)에서 마실 음료를 미리 골라 주세요. 핫·아이스도 함께 고르며, <b>10월 21일(수) 16:00까지</b>는 언제든 다시 바꿀 수 있습니다.</p>
+  <form id="dkForm" autocomplete="on" novalidate>
+   <label for="dkPhone" class="melabel">휴대폰 번호를 입력해 주세요</label>
+   <input id="dkPhone" class="meinput" type="tel" inputmode="numeric" autocomplete="tel" placeholder="010-0000-0000" maxlength="13">
+   <button class="btn" id="dkGo" type="submit">확인하고 고르기</button>
+  </form>
+  <p class="meerr" id="dkErr" role="alert" hidden></p>
+  <div id="dkPick" hidden>
+   <p class="mehello"><b id="dkName"></b>님, 음료를 골라 주세요</p>
+   <div class="dkitems" id="dkItems" role="radiogroup" aria-label="음료"></div>
+   <div class="dkside">
+    <div class="dktemps" id="dkTemps" role="radiogroup" aria-label="핫 또는 아이스"></div>
+    <label class="dkdecaf" id="dkDecafL" hidden><input type="checkbox" id="dkDecaf"> 디카페인으로 변경</label>
+    <button class="btn" id="dkSave" type="button" disabled>선택 저장하기</button>
+    <p class="note strong" id="dkDone" hidden></p>
+   </div>
+   <div class="row dkother"><button class="btn ghost" id="dkOther" type="button">다른 번호로 확인</button></div>
+  </div>
+  <p class="small muted"><a href="#drink" id="dkAdminOpen">담당자 확인</a></p>
+  <div id="dkAdmin" hidden>
+   <form id="dkAdminForm" novalidate>
+    <label for="dkPin" class="melabel">관리자 번호</label>
+    <input id="dkPin" class="meinput" type="password" inputmode="numeric" autocomplete="off" maxlength="20">
+    <button class="btn" type="submit">집계 보기</button>
+   </form>
+   <p class="meerr" id="dkAdminErr" role="alert" hidden></p>
+   <div id="dkAdminRes" hidden></div>
+  </div>
+ </div>
+</section>
+
+<section class="slide" id="groups" data-group="지역 탐방" data-title="조별 일정">
+ <div class="wrap">
+  <h3 style="margin-bottom:12px">조별 일정 (14:00 ~ 16:00) · A조</h3>
+  <div class="grp"><h3>A조 · 연수번호 1~48</h3>
+   <div class="blk" data-start="2026-10-22T14:00" data-end="2026-10-22T15:00"><time>14:00 ~ 15:00</time><br><b>오두산통일전망대</b> 관람 및 자유 시간<br><span class="small muted">문화해설사 도슨트 관람 14:00~14:30<br>자유시간(옥상 전망대 등 관람) 14:30~14:50<br>장단콩웰빙마루로 이동 14:50~15:00</span></div>
+   <div class="blk" data-start="2026-10-22T15:00" data-end="2026-10-22T16:00"><time>15:00 ~ 16:00</time><br><b>장단콩웰빙마루</b> 된장 만들기 체험 및 자유 시간<br><span class="small muted">된장 만들기 체험 15:00~15:40</span></div></div>
+ </div>
+</section>
+
+<section class="slide" id="groupsb" data-group="지역 탐방" data-title="조별 일정">
+ <div class="wrap">
+  <h3 style="margin-bottom:12px">조별 일정 (14:00 ~ 16:00) · B조</h3>
+  <div class="grp"><h3>B조 · 연수번호 49~97</h3>
+   <div class="blk" data-start="2026-10-22T14:00" data-end="2026-10-22T15:00"><time>14:00 ~ 15:00</time><br><b>장단콩웰빙마루</b> 된장 만들기 체험 및 자유 시간<br><span class="small muted">된장 만들기 체험 14:00~14:40</span></div>
+   <div class="blk" data-start="2026-10-22T15:00" data-end="2026-10-22T16:00"><time>15:00 ~ 16:00</time><br><b>오두산통일전망대</b> 관람 및 자유 시간<br><span class="small muted">문화해설사 도슨트 관람 15:00~15:30<br>자유시간(옥상 전망대 등 관람) 15:30~15:50<br>장단콩웰빙마루로 복귀 15:50~16:00</span></div></div>
+  <p class="small muted">※ 상기 일정은 현지사정 및 교통체증, 천재지변 등의 상황으로 변경될 수 있습니다.</p>
+ </div>
+</section>
+
 <section class="slide" id="criteria" data-group="연수 일정표" data-title="이수 기준">
  <div class="wrap">
   <h2>✅ 이수 기준</h2>
@@ -575,90 +659,6 @@ p{margin-bottom:12px}
   <p class="small muted">이미지를 누르면 층별 안내가 포함된 전체 안내도를 볼 수 있습니다.</p>
   <p><b>강의실</b> · 대강당 (율곡관 2층)</p>
   <p><b>주차</b> · 자운서원 주차장 (본원 내 주차 금지)</p>
- </div>
-</section>
-
-<!-- 지역 탐방 -->
-<section class="slide" id="tour" data-group="지역 탐방" data-title="호차 안내">
- <div class="wrap">
-  <h2>🚍 지역 탐방 체험</h2>
-  <p class="muted" style="margin-top:-8px">10. 22.(목) 오후</p>
-  <p>버스 3대로 이동하며, <b>연수번호에 따라</b> 호차를 나눠 탑승합니다.</p>
-  <div class="cars">
-   <div class="car"><b>1호차</b><span>1 ~ 32번</span></div>
-   <div class="car"><b>2호차</b><span>33 ~ 64번</span></div>
-   <div class="car"><b>3호차</b><span>65 ~ 97번</span></div>
-  </div>
-  <p style="margin-top:14px">11:30 연수원 출발부터 16:10 연수원으로 출발할 때까지 위 호차로 탑승합니다.</p>
-  <p class="small muted">조별 체험 시 차량이 바뀔 수 있습니다. 자세한 이동 일정은 다음 장을 확인해 주세요.</p>
- </div>
-</section>
-
-<section class="slide" id="detail" data-group="지역 탐방" data-title="상세 일정">
- <div class="wrap">
-  <h2>🗓️ 탐방 상세 일정</h2>
-  <ol class="tl">
-   <li data-start="2026-10-22T11:30" data-end="2026-10-22T12:10"><time>11:30</time><b>경기도율곡교육연수원 출발</b><small>연수번호별 호차 탑승</small></li>
-   <li data-start="2026-10-22T12:10" data-end="2026-10-22T12:40"><time>12:10</time><b>로빈의 숲 도착 · 점심식사</b><small>메뉴: 모듬바베큐(삼겹살+돼지갈비+오리+쏘시지)</small></li>
-   <li data-start="2026-10-22T12:40" data-end="2026-10-22T13:30"><time>12:40</time><b>카페 로빈포레스트 · 티타임</b><small>마실 음료는 <span data-page="drink"></span>에서 미리 선택해 주세요.</small></li>
-   <li data-start="2026-10-22T13:30" data-end="2026-10-22T13:40"><time>13:30</time><b>장단콩웰빙마루로 이동</b><small>호차별 탑승</small></li>
-   <li data-start="2026-10-22T13:40" data-end="2026-10-22T14:00"><time>13:40</time><b>장단콩웰빙마루 주차장 도착</b></li>
-   <li data-start="2026-10-22T14:00" data-end="2026-10-22T16:10"><time>14:00</time><b>‘조’별 체험</b><small>다음 장의 조별 일정을 확인해 주세요.</small></li>
-   <li data-start="2026-10-22T16:10" data-end="2026-10-22T16:30"><time>16:10</time><b>집결 및 연수원으로 출발</b><small>호차별 탑승 후 이동</small></li>
-  </ol>
- </div>
-</section>
-
-<section class="slide" id="drink" data-group="지역 탐방" data-title="음료 선택">
- <div class="wrap">
-  <h2>☕ 음료 미리 선택</h2>
-  <p>탐방 중 <b>카페 로빈포레스트</b>(12:40)에서 마실 음료를 미리 골라 주세요. 핫·아이스도 함께 고르며, <b>10월 21일(수) 16:00까지</b>는 언제든 다시 바꿀 수 있습니다.</p>
-  <form id="dkForm" autocomplete="on" novalidate>
-   <label for="dkPhone" class="melabel">휴대폰 번호를 입력해 주세요</label>
-   <input id="dkPhone" class="meinput" type="tel" inputmode="numeric" autocomplete="tel" placeholder="010-0000-0000" maxlength="13">
-   <button class="btn" id="dkGo" type="submit">확인하고 고르기</button>
-  </form>
-  <p class="meerr" id="dkErr" role="alert" hidden></p>
-  <div id="dkPick" hidden>
-   <p class="mehello"><b id="dkName"></b>님, 음료를 골라 주세요</p>
-   <div class="dkitems" id="dkItems" role="radiogroup" aria-label="음료"></div>
-   <div class="dkside">
-    <div class="dktemps" id="dkTemps" role="radiogroup" aria-label="핫 또는 아이스"></div>
-    <label class="dkdecaf" id="dkDecafL" hidden><input type="checkbox" id="dkDecaf"> 디카페인으로 변경</label>
-    <button class="btn" id="dkSave" type="button" disabled>선택 저장하기</button>
-    <p class="note strong" id="dkDone" hidden></p>
-   </div>
-   <div class="row dkother"><button class="btn ghost" id="dkOther" type="button">다른 번호로 확인</button></div>
-  </div>
-  <p class="small muted"><a href="#drink" id="dkAdminOpen">담당자 확인</a></p>
-  <div id="dkAdmin" hidden>
-   <form id="dkAdminForm" novalidate>
-    <label for="dkPin" class="melabel">관리자 번호</label>
-    <input id="dkPin" class="meinput" type="password" inputmode="numeric" autocomplete="off" maxlength="20">
-    <button class="btn" type="submit">집계 보기</button>
-   </form>
-   <p class="meerr" id="dkAdminErr" role="alert" hidden></p>
-   <div id="dkAdminRes" hidden></div>
-  </div>
- </div>
-</section>
-
-<section class="slide" id="groups" data-group="지역 탐방" data-title="조별 일정">
- <div class="wrap">
-  <h3 style="margin-bottom:12px">조별 일정 (14:00 ~ 16:00) · A조</h3>
-  <div class="grp"><h3>A조 · 연수번호 1~48</h3>
-   <div class="blk" data-start="2026-10-22T14:00" data-end="2026-10-22T15:00"><time>14:00 ~ 15:00</time><br><b>오두산통일전망대</b> 관람 및 자유 시간<br><span class="small muted">문화해설사 도슨트 관람 14:00~14:30<br>자유시간(옥상 전망대 등 관람) 14:30~14:50<br>장단콩웰빙마루로 이동 14:50~15:00</span></div>
-   <div class="blk" data-start="2026-10-22T15:00" data-end="2026-10-22T16:00"><time>15:00 ~ 16:00</time><br><b>장단콩웰빙마루</b> 된장 만들기 체험 및 자유 시간<br><span class="small muted">된장 만들기 체험 15:00~15:40</span></div></div>
- </div>
-</section>
-
-<section class="slide" id="groupsb" data-group="지역 탐방" data-title="조별 일정">
- <div class="wrap">
-  <h3 style="margin-bottom:12px">조별 일정 (14:00 ~ 16:00) · B조</h3>
-  <div class="grp"><h3>B조 · 연수번호 49~97</h3>
-   <div class="blk" data-start="2026-10-22T14:00" data-end="2026-10-22T15:00"><time>14:00 ~ 15:00</time><br><b>장단콩웰빙마루</b> 된장 만들기 체험 및 자유 시간<br><span class="small muted">된장 만들기 체험 14:00~14:40</span></div>
-   <div class="blk" data-start="2026-10-22T15:00" data-end="2026-10-22T16:00"><time>15:00 ~ 16:00</time><br><b>오두산통일전망대</b> 관람 및 자유 시간<br><span class="small muted">문화해설사 도슨트 관람 15:00~15:30<br>자유시간(옥상 전망대 등 관람) 15:30~15:50<br>장단콩웰빙마루로 복귀 15:50~16:00</span></div></div>
-  <p class="small muted">※ 상기 일정은 현지사정 및 교통체증, 천재지변 등의 상황으로 변경될 수 있습니다.</p>
  </div>
 </section>
 
