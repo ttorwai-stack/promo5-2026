@@ -964,6 +964,12 @@ document.getElementById('dkAdminForm').addEventListener('submit',function(e){e.p
       el.classList.toggle('past',now>=e);
       el.classList.toggle('now',now>=s&&now<e);
     });
+    // 한 일차의 일정이 모두 끝나면 일차 머리글(제목·주제·등록 안내)도 흐리게
+    [].forEach.call(document.querySelectorAll('.sec'),function(sec){
+      var items=sec.querySelectorAll('[data-end]');if(!items.length)return;
+      var all=[].every.call(items,function(el){return Date.parse(el.dataset.end+':00+09:00')<=now});
+      [].forEach.call(sec.querySelectorAll('h3,.dayhead,.reg'),function(h){h.classList.toggle('past',all)});
+    });
   }
   mark();setInterval(mark,60000);
 
