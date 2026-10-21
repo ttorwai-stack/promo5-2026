@@ -347,7 +347,7 @@ p{margin-bottom:12px}
   <h2>📢 주요 공지 (1/2)</h2>
   <div class="note"><p><b>1. 생활관 배정이 완료</b>되었습니다. 배정된 방과 룸메이트를 확인해 주세요.</p><a class="btn sm" href="https://ttorwai-stack.github.io/roomassign/?c=main" target="_blank" rel="noopener">생활관 배정 결과 확인하러 가기</a><p class="ref">자세한 안내: <span data-page="room"></span></p></div>
   <div class="note"><p><b>2.</b> 주차는 <b>반드시 자운서원 주차장</b>을 이용해 주세요. 셔틀버스 이용자는 버스 시간표를 꼭 확인해 주세요.</p><p class="ref">자세한 안내: <span data-page="car"></span> · <span data-page="bus"></span></p></div>
-  <div class="note"><p><b>3.</b> 1일차(10. 21.)에는 <b>09:30까지</b> 등록을 완료해 주세요.</p><p class="small muted">2~3일차(10. 22.~23.)는 08:50까지 등록을 완료해 주세요.</p></div>
+  <div class="note" data-hide="2026-10-21T10:00"><p><b>3.</b> 1일차(10. 21.)에는 <b>09:30까지</b> 등록을 완료해 주세요.</p><p class="small muted">2~3일차(10. 22.~23.)는 08:50까지 등록을 완료해 주세요.</p></div>
  </div>
 </section>
 
@@ -719,6 +719,23 @@ p{margin-bottom:12px}
 
 <script>
 (function(){
+  // 수명 관리: data-hide="YYYY-MM-DDTHH:MM"(KST) 이후에는 사라짐(쪽은 접속 시 제거). ?now=2026-10-22T14:00 로 시험
+  function nowMs(){var q=location.search.match(/[?&]now=([^&]+)/);return q?Date.parse(decodeURIComponent(q[1])+'+09:00'):Date.now()}
+  function prune(first){
+    var t=nowMs();
+    [].forEach.call(document.querySelectorAll('[data-hide]'),function(el){
+      var gone=t>=Date.parse(el.dataset.hide+':00+09:00');
+      if(gone&&first&&el.classList.contains('slide')){el.parentNode.removeChild(el);return}
+      el.hidden=gone;
+    });
+    var n=0;
+    [].forEach.call(document.querySelectorAll('#notice .note,#notice2 .note'),function(el){
+      if(el.hidden)return;
+      var b=el.querySelector('p b');
+      if(b&&b.firstChild&&/^\d+\./.test(b.firstChild.nodeValue)){n++;b.firstChild.nodeValue=b.firstChild.nodeValue.replace(/^\d+\./,n+'.')}
+    });
+  }
+  prune(true);
   var deck=document.getElementById('deck');
   var slides=[].slice.call(document.querySelectorAll('.slide'));
   var N=slides.length, cur=0;
@@ -940,8 +957,8 @@ document.getElementById('dkAdminForm').addEventListener('submit',function(e){e.p
 
 // fade past items (KST). ?now=2026-10-22T14:00 for testing
   function mark(){
-    var q=location.search.match(/[?&]now=([^&]+)/);
-    var now=q?Date.parse(decodeURIComponent(q[1])+'+09:00'):Date.now();
+    prune(false);
+    var now=nowMs();
     [].forEach.call(document.querySelectorAll('[data-end]'),function(el){
       var s=Date.parse(el.dataset.start+':00+09:00'),e=Date.parse(el.dataset.end+':00+09:00');
       el.classList.toggle('past',now>=e);
