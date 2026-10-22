@@ -395,10 +395,10 @@ p{margin-bottom:12px}
   <div class="meres" id="meRes" hidden>
    <p class="mehello"><b id="meName"></b>님, 환영합니다</p>
    <div class="mebox mebig"><span>내 연수번호</span><strong id="meNo"></strong></div>
-   <div class="mebox"><span>2일차 AI 분반<small>10. 22.(목) 오전</small></span><strong id="meAi"></strong></div>
-   <div class="mebox"><span>호차<small>10. 22.(목) 지역 탐방</small></span><strong id="meCar"></strong></div>
-   <div class="mebox"><span>탐방 조<small>10. 22.(목) 오후</small></span><strong id="meGrp"></strong></div>
-   <p class="small muted">호차에 따른 탐방 시간은 <span data-page="tour"></span>, 조별 일정은 연수번호(1~48 A조 · 49~97 B조)에 따라 <span data-page="groups"></span>·<span data-page="groupsb"></span>에서 확인해 주세요.</p>
+   <div class="mebox" data-hide="2026-10-22T12:00"><span>2일차 AI 분반<small>10. 22.(목) 오전</small></span><strong id="meAi"></strong></div>
+   <div class="mebox" data-hide="2026-10-22T17:00"><span>호차<small>10. 22.(목) 지역 탐방</small></span><strong id="meCar"></strong></div>
+   <div class="mebox" data-hide="2026-10-22T17:00"><span>탐방 조<small>10. 22.(목) 오후</small></span><strong id="meGrp"></strong></div>
+   <p class="small muted" data-hide="2026-10-22T17:00">호차에 따른 탐방 시간은 <span data-page="tour"></span>, 조별 일정은 연수번호(1~48 A조 · 49~97 B조)에 따라 <span data-page="groups"></span>·<span data-page="groupsb"></span>에서 확인해 주세요.</p>
    <div class="row"><button class="btn ghost" id="meOther" type="button">다른 번호로 확인</button></div>
   </div>
   <p class="small muted" id="meNote">입력한 번호는 연수 담당자에게 등록된 번호와 대조하는 데만 쓰이며, 본인 정보만 표시됩니다. 이 기기에 번호를 기억해 두어 다음부터는 바로 확인할 수 있습니다.</p>
@@ -425,8 +425,8 @@ p{margin-bottom:12px}
    <p class="dayhead">Lead the Future, 미래를 이끌다</p>
    <p class="reg">🕘 등록 <b>08:50</b>까지</p>
    <ol class="tl">
-   <li data-start="2026-10-22T09:00" data-end="2026-10-22T12:00"><time>09:00 ~ 12:00</time><b>AI로 바꾸는 일하기 방식</b><small>AI활용 정책기획실습 · 위메이크협동조합<br>1분반 김애린 · 2분반 유지연 · 3분반 정혜진<br>분반별 수업 장소는 <span data-page="aiclass"></span>을 확인해 주세요.</small></li>
-   <li data-start="2026-10-22T13:00" data-end="2026-10-22T17:00"><time>13:00 ~ 17:00</time><b>지역 현장탐방</b><small>지역을 읽고, 경기교육을 잇다<br>오두산통일전망대 · 파주 장단콩 체험<br>자세한 이동 일정은 <span data-page="detail"></span>을 확인해 주세요.</small></li>
+   <li data-start="2026-10-22T09:00" data-end="2026-10-22T12:00"><time>09:00 ~ 12:00</time><b>AI로 바꾸는 일하기 방식</b><small>AI활용 정책기획실습 · 위메이크협동조합<br>1분반 김애린 · 2분반 유지연 · 3분반 정혜진<span data-hide="2026-10-22T12:00"><br>분반별 수업 장소는 <span data-page="aiclass"></span>을 확인해 주세요.</span></small></li>
+   <li data-start="2026-10-22T13:00" data-end="2026-10-22T17:00"><time>13:00 ~ 17:00</time><b>지역 현장탐방</b><small>지역을 읽고, 경기교육을 잇다<br>오두산통일전망대 · 파주 장단콩 체험<span data-hide="2026-10-22T17:00"><br>자세한 이동 일정은 <span data-page="detail"></span>을 확인해 주세요.</span></small></li>
   </ol>
   </div>
   <div class="sec">
@@ -444,7 +444,7 @@ p{margin-bottom:12px}
  </div>
 </section>
 
-<section class="slide" id="aiclass" data-group="연수 일정표" data-title="AI 분반 장소">
+<section class="slide" id="aiclass" data-group="연수 일정표" data-title="AI 분반 장소" data-hide="2026-10-22T12:00">
  <div class="wrap">
   <h2>🧭 AI 분반 수업 장소</h2>
   <p class="muted" style="margin-top:-8px">2일차 10. 22.(목) 09:00 ~ 12:00 · 분반별로 장소가 다릅니다.</p>
@@ -486,7 +486,7 @@ p{margin-bottom:12px}
 </section>
 
 <!-- 지역 탐방 -->
-<section class="slide" id="tour" data-group="지역 탐방" data-title="호차 안내">
+<section class="slide" id="tour" data-group="지역 탐방" data-title="호차 안내" data-hide="2026-10-22T17:00">
  <div class="wrap">
   <h2>🚍 지역 탐방 체험</h2>
   <p class="muted" style="margin-top:-8px">10. 22.(목) 오후</p>
@@ -501,7 +501,7 @@ p{margin-bottom:12px}
  </div>
 </section>
 
-<section class="slide" id="detail" data-group="지역 탐방" data-title="상세 일정">
+<section class="slide" id="detail" data-group="지역 탐방" data-title="상세 일정" data-hide="2026-10-22T17:00">
  <div class="wrap">
   <h2>🗓️ 탐방 상세 일정</h2>
   <ol class="tl">
@@ -516,7 +516,7 @@ p{margin-bottom:12px}
  </div>
 </section>
 
-<section class="slide" id="drink" data-group="지역 탐방" data-title="음료 선택">
+<section class="slide" id="drink" data-group="지역 탐방" data-title="음료 선택" data-hide="2026-10-22T17:00">
  <div class="wrap">
   <h2>☕ 음료 미리 선택</h2>
   <p>탐방 중 <b>카페 로빈포레스트</b>(12:40)에서 마실 음료를 미리 골라 주세요. 핫·아이스도 함께 고르며, <b>10월 21일(수) 16:00까지</b>는 언제든 다시 바꿀 수 있습니다.</p>
@@ -550,7 +550,7 @@ p{margin-bottom:12px}
  </div>
 </section>
 
-<section class="slide" id="groups" data-group="지역 탐방" data-title="조별 일정">
+<section class="slide" id="groups" data-group="지역 탐방" data-title="조별 일정" data-hide="2026-10-22T17:00">
  <div class="wrap">
   <h3 style="margin-bottom:12px">조별 일정 (14:00 ~ 16:00) · A조</h3>
   <div class="grp"><h3>A조 · 연수번호 1~48</h3>
@@ -559,7 +559,7 @@ p{margin-bottom:12px}
  </div>
 </section>
 
-<section class="slide" id="groupsb" data-group="지역 탐방" data-title="조별 일정">
+<section class="slide" id="groupsb" data-group="지역 탐방" data-title="조별 일정" data-hide="2026-10-22T17:00">
  <div class="wrap">
   <h3 style="margin-bottom:12px">조별 일정 (14:00 ~ 16:00) · B조</h3>
   <div class="grp"><h3>B조 · 연수번호 49~97</h3>
@@ -882,6 +882,7 @@ meForm.addEventListener('submit',function(e){e.preventDefault();meLookup(mePhone
 document.getElementById('meOther').onclick=function(){
 lsSet('');mePhone.value='';meRes.hidden=true;meForm.hidden=false;meNote.hidden=false;meMsg('');mePhone.focus()};
 var saved=lsGet();if(saved&&ME_API){mePhone.value=fmtPhone(saved);meLookup(saved,true)}
+if(document.getElementById('dkForm')){ // 음료 선택 쪽이 사라진 뒤에는 건너뜀
 // 음료 선택 (본인 확인은 '내 연수 정보'와 같은 번호·서버를 쓴다)
 var dkForm=document.getElementById('dkForm'),dkPhone=document.getElementById('dkPhone'),dkGo=document.getElementById('dkGo'),
 dkErr=document.getElementById('dkErr'),dkPick=document.getElementById('dkPick'),dkItems=document.getElementById('dkItems'),
@@ -983,8 +984,7 @@ if(j&&j.ok)adminRender(j);
 else{dkAdminRes.hidden=true;dkAdminErr.textContent=j&&j.reason==='badpin'?'관리자 번호가 맞지 않습니다.':j&&j.reason==='locked'?'잠시 후 다시 시도해 주세요.':j&&j.reason==='noadmin'?'관리자 번호가 아직 설정되지 않았습니다.':'확인하지 못했습니다.';dkAdminErr.hidden=false}})
 .catch(function(){dkAdminErr.textContent='서버에 연결할 수 없습니다.';dkAdminErr.hidden=false})}
 document.getElementById('dkAdminForm').addEventListener('submit',function(e){e.preventDefault();adminLoad()});
-
-
+}
 // fade past items (KST). ?now=2026-10-22T14:00 for testing
   function mark(){
     prune(false);
