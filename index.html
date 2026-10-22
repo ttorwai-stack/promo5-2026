@@ -317,6 +317,18 @@ p{margin-bottom:12px}
 <main class="deck" id="deck">
 
 <!-- 시작 -->
+<section class="slide" id="survey" data-group="시작" data-title="설문 참여" data-show="2026-10-23T14:40">
+ <div class="wrap">
+  <p class="org">경기도교육청율곡연수원</p>
+  <h1>고생 많으셨습니다!</h1>
+  <p class="muted" style="margin-bottom:26px">2026년 5급 승진예정자 연수 · 10. 23.(금)</p>
+  <h3>마지막으로 설문에 참여해 주세요</h3>
+  <p>2박 3일간 함께해 주셔서 감사합니다. 수료식에 앞서 연수 사후 설문에 참여해 주시면, 다음 과정을 준비하는 데 큰 도움이 됩니다.</p>
+  <div class="row"><a class="btn" href="https://joo.is/5급사후설문" target="_blank" rel="noopener">설문 참여하기</a></div>
+  <p class="swipe">옆으로 넘기면 연수 안내를 볼 수 있습니다 ›</p>
+ </div>
+</section>
+
 <section class="slide" id="cover" data-group="시작" data-title="환영합니다">
  <div class="wrap">
   <p class="org">경기도교육청율곡연수원</p>
@@ -719,15 +731,22 @@ p{margin-bottom:12px}
 
 <script>
 (function(){
-  // 수명 관리: data-hide="YYYY-MM-DDTHH:MM"(KST) 이후에는 사라짐(쪽은 접속 시 제거). ?now=2026-10-22T14:00 로 시험
+  // 수명 관리: data-show="…" 이후에 나타나고 data-hide="…" 이후에는 사라짐(KST, YYYY-MM-DDTHH:MM; 쪽은 접속 시 추가/제거, 열어 둔 화면은 그 시각에 자동 새로고침). ?now=2026-10-22T14:00 로 시험
   function nowMs(){var q=location.search.match(/[?&]now=([^&]+)/);return q?Date.parse(decodeURIComponent(q[1])+'+09:00'):Date.now()}
   function prune(first){
     var t=nowMs();
-    [].forEach.call(document.querySelectorAll('[data-hide]'),function(el){
-      var gone=t>=Date.parse(el.dataset.hide+':00+09:00');
+    var next=Infinity;
+    [].forEach.call(document.querySelectorAll('[data-show],[data-hide]'),function(el){
+      var sh=el.dataset.show?Date.parse(el.dataset.show+':00+09:00'):-Infinity;
+      var hd=el.dataset.hide?Date.parse(el.dataset.hide+':00+09:00'):Infinity;
+      var gone=t>=hd||t<sh;
+      if(t<sh&&sh<next)next=sh;
+      if(t<hd&&hd<next)next=hd;
       if(gone&&first&&el.classList.contains('slide')){el.parentNode.removeChild(el);return}
       el.hidden=gone;
     });
+    // 쪽이 나타나거나 사라질 시각이 되면 자동으로 새로고침(열어 둔 화면 반영)
+    if(first&&next<Infinity&&!/[?&]now=/.test(location.search)){var w=next-Date.now()+1500;if(w>0&&w<2147483000)setTimeout(function(){location.reload()},w)}
     var n=0;
     [].forEach.call(document.querySelectorAll('#notice .note,#notice2 .note'),function(el){
       if(el.hidden)return;
