@@ -328,7 +328,7 @@ html:not(.ready) [data-show],html:not(.ready) [data-hide]{display:none!important
 <main class="deck" id="deck">
 
 <!-- 시작 -->
-<section class="slide" id="survey" data-group="시작" data-title="설문 참여" data-show="2026-10-23T14:30">
+<section class="slide" id="survey" data-group="시작" data-title="설문 참여" data-first data-show="2026-10-23T14:30">
  <div class="wrap">
   <p class="org">경기도교육청율곡연수원</p>
   <h1>고생 많으셨습니다!</h1>
@@ -759,9 +759,9 @@ html:not(.ready) [data-show],html:not(.ready) [data-hide]{display:none!important
     });
     // 쪽이 나타나거나 사라질 시각이 되면 자동으로 새로고침(열어 둔 화면 반영)
     if(first&&next<Infinity&&!/[?&]now=/.test(location.search)){
-      var w=next-Date.now()+1500;if(w>0&&w<2147483000)setTimeout(function(){location.reload()},w);
+      var w=next-Date.now()+1500;if(w>0&&w<2147483000)setTimeout(function(){location.replace(location.pathname+location.search)},w);
       // 절전·백그라운드로 타이머가 늦어져도 시각이 되면 곧바로 새로고침(5초마다·화면에 돌아올 때 확인)
-      var chk=function(){if(Date.now()>=next)location.reload()};
+      var chk=function(){if(Date.now()>=next)location.replace(location.pathname+location.search)};
       setInterval(chk,5000);
       document.addEventListener('visibilitychange',chk);window.addEventListener('focus',chk);window.addEventListener('pageshow',chk);
     }
@@ -1011,7 +1011,9 @@ document.getElementById('dkAdminForm').addEventListener('submit',function(e){e.p
   }
   mark();setInterval(mark,60000);
 
-  var start=idx(location.hash.replace('#',''));
+  var hh=location.hash.replace('#','');
+  var fs=document.querySelector('.slide[data-first]'); // 안내를 위해 처음 화면으로 띄울 쪽(예: 설문): 주소에 쪽 이름이 없거나 표지일 때 먼저 보여 줌
+  var start=(fs&&(!hh||hh==='cover'))?idx(fs.id):idx(hh);
   go(start>=0?start:0,true);
 })();
 </script>
