@@ -316,6 +316,7 @@ p{margin-bottom:12px}
   .qr img{width:min(460px,64vh)}
   .qr p{font-size:1.1rem}
 }
+html:not(.ready) [data-show],html:not(.ready) [data-hide]{display:none!important}
 </style>
 </head>
 <body>
@@ -766,6 +767,7 @@ p{margin-bottom:12px}
     });
   }
   prune(true);
+  document.documentElement.classList.add('ready');
   var deck=document.getElementById('deck');
   var slides=[].slice.call(document.querySelectorAll('.slide'));
   var N=slides.length, cur=0;
