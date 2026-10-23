@@ -2,6 +2,7 @@
 <html lang="ko" data-course-end="2026-10-23T15:30" data-title-after="5급 승진예정자 연수 자료">
 <head>
 <meta charset="utf-8">
+<meta name="build" content="20261024-041608">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>5급 승진예정자 연수 안내</title>
@@ -773,6 +774,19 @@ html:not(.ready) [data-show],html:not(.ready) [data-hide]{display:none!important
     });
   }
   prune(true);
+  // 오래된 캐시로 열린 경우 최신본으로 한 번 자동 교체(GitHub Pages는 10분간 캐시됨)
+  try{
+    var mb=document.querySelector('meta[name=build]');
+    if(mb&&!/[?&]now=/.test(location.search)&&!sessionStorage.getItem('rf_'+mb.content)){
+      fetch(location.pathname+location.search,{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){
+        var m=t.match(/<meta name="build" content="([^"]*)"/);
+        if(m&&m[1]!==mb.content){
+          try{sessionStorage.setItem('rf_'+mb.content,'1')}catch(e){}
+          fetch(location.pathname+location.search,{cache:'reload'}).then(function(){location.replace(location.pathname+location.search)});
+        }
+      }).catch(function(){});
+    }
+  }catch(e){}
   document.documentElement.classList.add('ready');
   var deck=document.getElementById('deck');
   var slides=[].slice.call(document.querySelectorAll('.slide'));
