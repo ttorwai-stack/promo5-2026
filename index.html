@@ -758,7 +758,13 @@ html:not(.ready) [data-show],html:not(.ready) [data-hide]{display:none!important
       el.hidden=gone;
     });
     // 쪽이 나타나거나 사라질 시각이 되면 자동으로 새로고침(열어 둔 화면 반영)
-    if(first&&next<Infinity&&!/[?&]now=/.test(location.search)){var w=next-Date.now()+1500;if(w>0&&w<2147483000)setTimeout(function(){location.reload()},w)}
+    if(first&&next<Infinity&&!/[?&]now=/.test(location.search)){
+      var w=next-Date.now()+1500;if(w>0&&w<2147483000)setTimeout(function(){location.reload()},w);
+      // 절전·백그라운드로 타이머가 늦어져도 시각이 되면 곧바로 새로고침(5초마다·화면에 돌아올 때 확인)
+      var chk=function(){if(Date.now()>=next)location.reload()};
+      setInterval(chk,5000);
+      document.addEventListener('visibilitychange',chk);window.addEventListener('focus',chk);window.addEventListener('pageshow',chk);
+    }
     var n=0;
     [].forEach.call(document.querySelectorAll('#notice .note,#notice2 .note'),function(el){
       if(el.hidden)return;
